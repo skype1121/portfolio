@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | System-1 Applicant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="overlay-grid"></div>
+
+    <nav>
+        <!-- Logo Area -->
+        <div class="nav-logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
+            <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" stroke="#8b5cf6" stroke-width="6" stroke-linejoin="round" fill="rgba(139, 92, 246, 0.1)"/>
+                <path d="M50 5 L50 50 L90 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M50 50 L10 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M10 27 L50 50 L90 27" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" stroke-dasharray="4 4"/>
+                <circle cx="50" cy="50" r="4" fill="#00e5ff"/>
+            </svg>
+            <span style="color: #fff; font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; letter-spacing: 1px;">RSY</span>
+        </div>
+
+        <div style="display: flex; align-items: stretch; gap: 0.5rem; height: 100%;">
+            <a href="index.html" class="nav-archive-btn lang-text" data-ko="소개" data-en="INTRO">소개</a>
+            <a href="project1.html" class="nav-archive-btn lang-text" data-ko="2026 프로젝트" data-en="2026 Projects">2026
+                프로젝트</a>
+            <a href="project2.html" class="nav-archive-btn lang-text" data-ko="2025 프로젝트" data-en="2025 Projects">2025
+                프로젝트</a>
+            <a href="board.html" class="nav-archive-btn lang-text" data-ko="Q&A 게시판" data-en="Q&A Board">Q&A 게시판</a>
+            <a href="contact.html" class="nav-archive-btn lang-text" data-ko="CONTACT" data-en="CONTACT">CONTACT</a>
+            <div class="lang-pill" style="margin-left: 0.5rem;">
+                <div class="pill-bg"></div>
+                <button class="pill-btn active" onclick="setLang('ko')">KO</button>
+                <button class="pill-btn" onclick="setLang('en')">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contact-page-wrapper">
+        <!-- LEFT: Appeal & Info -->
+        <aside class="contact-appeal">
+            <p class="appeal-desc lang-text"
+                data-ko="안전한 가상 환경에서 벗어나 모터의 발열, CAN 통신의 지연, 그리고 예측 불가능한 외란과 직접 부딪치며 시스템을 만들었습니다.<br><br>현장에 즉시 투입 가능한 '실제 하드웨어 최적화 엔지니어'가 필요하다면, 지금 바로 연결 프로세스를 시작하십시오."
+                data-en="Stepping out of safe virtual environments, I built systems directly confronting motor heat, CAN delays, and unpredictable disturbances.<br><br>If you need a 'Real-Hardware Optimization Engineer' ready for immediate deployment, initiate the connection process now.">
+                안전한 가상 환경에서 벗어나 모터의 발열, CAN 통신의 지연, 그리고 예측 불가능한 외란과 직접 부딪치며 시스템을 만들었습니다.<br><br>현장에 즉시 투입 가능한 '실제 하드웨어
+                최적화 엔지니어'가 필요하다면, 지금 바로 연결 프로세스를 시작하십시오.
+            </p>
+
+            <div class="contact-info-box">
+                <div class="info-item">
+                    <span class="info-label">[ EMAIL_ADDRESS ]</span>
+                    <a href="mailto:skype1121@dongyang.ac.kr" class="info-value glow-hover">skype1121@dongyang.ac.kr</a>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">[ COMM_CHANNEL ]</span>
+                    <a href="tel:010-7332-3638" class="info-value glow-hover">010-7332-3638</a>
+                </div>
+            </div>
+            <div class="terminal-deco">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div> <span
+                    style="margin-left: 10px; color:rgba(255,255,255,0.4); font-family:var(--font-mono); font-size:12px;">WAITING_FOR_CONNECTION...</span>
+            </div>
+        </aside>
+
+        <!-- RIGHT: Form -->
+        <main class="contact-container" style="margin: 0; width: 100%;">
+            <h2 class="contact-title lang-text" data-ko="연락망 자산 수신" data-en="Secure Contact Channel">연락망 자산 수신</h2>
+
+            <form id="contact-form" onsubmit="event.preventDefault(); submitContact();">
+                <div class="form-group">
+                    <label for="name" class="form-label lang-text" data-ko="[NAME / COMPANY] 기관 혹은 성함"
+                        data-en="[NAME / COMPANY] Full Name or Organization">[NAME / COMPANY] 기관 혹은 성함</label>
+                    <input type="text" id="name" class="form-input" required
+                        placeholder="ex) Boston Dynamics / John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label lang-text" data-ko="[REPLY_MAIL] 회신 이메일 주소"
+                        data-en="[REPLY_MAIL] Return Email Address">[REPLY_MAIL] 회신 이메일 주소</label>
+                    <input type="email" id="email" class="form-input" required placeholder="ex) hr@bostondynamics.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="message" class="form-label lang-text" data-ko="[PAYLOAD] 제안 및 문의 내용"
+                        data-en="[PAYLOAD] Proposal & Inquiry Content">[PAYLOAD] 제안 및 문의 내용</label>
+                    <textarea id="message" class="form-input form-textarea" required
+                        placeholder="요청하실 프로젝트나 회사 정보, 인터뷰 일정 등을 자유롭게 적어주세요..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn lang-text" data-ko="패킷 전송 [SEND]"
+                    data-en="Transmit Packet [SEND]">패킷 전송 [SEND]</button>
+            </form>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function submitContact() {
+            // Frontend generic success behavior
+            const btn = document.querySelector('.submit-btn');
+            const originalText = btn.innerHTML;
+
+            // Show successful connection UI
+            btn.innerHTML = '<span style="color:#0f0; text-shadow: 0 0 10px #0f0;">[ OK ] TRANSMISSION SUCCESS</span>';
+            btn.style.pointerEvents = 'none';
+            btn.style.boxShadow = '0 0 30px #0f0';
+            btn.style.borderColor = '#0f0';
+
+            setTimeout(() => {
+                document.getElementById('contact-form').reset();
+                btn.innerHTML = originalText;
+                btn.style.pointerEvents = 'auto';
+                btn.style.boxShadow = 'none';
+                btn.style.borderColor = 'var(--bd-cyan)';
+
+                const isEn = document.querySelector('.lang-btn.active') ? document.querySelector('.lang-btn.active').innerText === 'EN' : false;
+                alert(isEn ? "Message transmitted securely! We will reach out soon." : "소중한 궤적 데이터가 성공적으로 버퍼에 쓰였습니다. 금방 회신드리겠습니다!");
+            }, 1500);
+        }
+    </script>
+    <style>
+        @keyframes formFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) translateZ(0);
+                filter: blur(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) translateZ(0);
+                filter: blur(0);
+            }
+        }
+
+        .contact-page-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5rem;
+            max-width: 1400px;
+            margin: 160px auto 80px auto;
+            padding: 0 4rem;
+        }
+
+        .contact-appeal {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .appeal-title {
+            font-size: clamp(32px, 4vw, 54px);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+        }
+
+        .appeal-title .highlight {
+            color: var(--bd-cyan);
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .appeal-desc {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            word-break: keep-all;
+        }
+
+        .contact-info-box {
+            background: rgba(0, 229, 255, 0.05);
+            border-left: 3px solid var(--bd-cyan);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .info-label {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            font-family: var(--font-mono);
+            transition: all 0.3s;
+        }
+
+        .info-value.glow-hover:hover {
+            color: var(--bd-cyan);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+
+        .terminal-deco {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        .terminal-deco .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .terminal-deco .red {
+            background: #ff3b30;
+        }
+
+        .terminal-deco .yellow {
+            background: #ffcc00;
+        }
+
+        .terminal-deco .green {
+            background: #28cd41;
+        }
+
+        .contact-container {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        @media (max-width: 1000px) {
+            .contact-page-wrapper {
+                flex-direction: column;
+                margin-top: 120px;
+                padding: 0 2rem;
+                gap: 3rem;
+            }
+
+            .contact-container {
+                width: 100%;
+            }
+        }
+    </style>
+</body>
+
+</html>

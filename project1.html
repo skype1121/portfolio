@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>류승윤 | Project Archive (BD System-1 Theme)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* Ultra-clean wide aesthetic based on main1/board */
+    .wrap {
+      width: 100%;
+      max-width: 1400px;
+      margin: 120px auto 50px auto;
+      padding: 0 2rem;
+      position: relative;
+    }
+
+    .archive-hero {
+      padding: 40px 0 60px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      margin-bottom: 40px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      color: var(--bd-cyan);
+      font-size: 13px;
+      letter-spacing: 1px;
+      background: rgba(0, 229, 255, 0.05);
+      border-left: 2px solid var(--bd-cyan);
+      margin-bottom: 22px;
+      font-family: var(--font-mono);
+    }
+
+    .badge::before {
+      content: none;
+    }
+
+    h1 {
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    }
+
+    .highlight {
+      color: var(--bd-cyan);
+    }
+
+    .hero-desc {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.9;
+      margin-bottom: 28px;
+      max-width: 900px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .meta-chip {
+      padding: 8px 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .nav-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 60px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      background: transparent;
+      transition: all 0.3s;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-primary {
+      border-color: var(--bd-cyan);
+      color: var(--bd-cyan);
+      background: rgba(0, 229, 255, 0.05);
+    }
+
+    .btn-primary:hover {
+      background: var(--bd-cyan);
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 40px;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .summary-card {
+      padding: 2.5rem;
+      border-left: 3px solid var(--bd-cyan);
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .summary-card h3 {
+      color: var(--bd-cyan);
+      margin-bottom: 15px;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+
+    .summary-card p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .summary-card strong {
+      color: #fff;
+      font-size: 20px;
+      display: block;
+      margin-bottom: 5px;
+      font-family: var(--font-mono);
+    }
+
+    /* Clean Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-item {
+      border-left: 2px solid rgba(255, 255, 255, 0.1);
+      padding-left: 2.5rem;
+      position: relative;
+      padding-bottom: 0.8rem;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+    }
+
+    .timeline-item.stage-cyan::before {
+      background: var(--bd-cyan);
+      box-shadow: 0 0 15px var(--bd-cyan);
+    }
+
+    .timeline-item.stage-blue::before {
+      background: #0088cc;
+      box-shadow: 0 0 15px #0088cc;
+    }
+
+    .timeline-item.stage-green::before {
+      background: #00ff64;
+      box-shadow: 0 0 15px #00ff64;
+    }
+
+    .timeline-head {
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 1.5px;
+    }
+
+    .stage-cyan .timeline-date {
+      color: var(--bd-cyan);
+    }
+
+    .stage-blue .timeline-date {
+      color: #0088cc;
+    }
+
+    .stage-green .timeline-date {
+      color: #00ff64;
+    }
+
+    .timeline-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+
+    .timeline-text {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 2;
+      font-size: 16px;
+      margin-bottom: 1.5rem;
+      white-space: pre-wrap;
+      font-weight: 300;
+    }
+
+    .timeline-text > div:first-child {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
+      padding: 1.5rem 1.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      height: 100%;
+    }
+
+    .pff-box {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      margin-bottom: 5px;
+      padding: 0 0 0 1.2rem;
+      background: transparent;
+      border-left: 2px solid rgba(255, 255, 255, 0.2);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .p-label {
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: bold;
+      width: 110px;
+      display: inline-block;
+    }
+
+    .f-label {
+      color: #ff3333;
+      font-weight: bold;
+      width: 110px;
+      display: inline-block;
+    }
+
+    .x-label {
+      color: #00ff64;
+      font-weight: bold;
+      width: 110px;
+      display: inline-block;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: var(--font-mono);
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+    }
+
+    .detail-box {
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.01);
+      overflow: hidden;
+      margin-top: 1.5rem;
+    }
+
+    .accordion-toggle {
+      width: 100%;
+      text-align: left;
+      background: rgba(255, 234, 0, 0.05);
+      border: 1px solid rgba(255, 234, 0, 0.4);
+      border-radius: 4px;
+      padding: 16px 24px;
+      color: #ffea00;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+      text-shadow: 0 0 8px rgba(255, 234, 0, 0.6);
+      box-shadow: inset 0 0 10px rgba(255, 234, 0, 0.1);
+      margin-bottom: 5px;
+    }
+
+    .accordion-toggle:hover {
+      color: #fff;
+      background: rgba(255, 234, 0, 0.15);
+      box-shadow: 0 0 20px rgba(255, 234, 0, 0.4), inset 0 0 10px rgba(255, 234, 0, 0.2);
+      border-color: #ffea00;
+      text-shadow: 0 0 15px #ffea00;
+      transform: translateY(-2px);
+    }
+
+    .accordion.active .accordion-toggle {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-bottom: 0;
+      box-shadow: 0 5px 15px rgba(255, 234, 0, 0.1);
+      color: #ffea00;
+    }
+
+    .accordion-icon {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .accordion-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+    }
+
+    .accordion.active .accordion-content {
+      grid-template-rows: 1fr;
+    }
+
+    .accordion-inner {
+      overflow: hidden;
+      padding: 0 24px;
+    }
+
+    .detail-copy {
+      padding: 2rem 0;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.9;
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    .detail-copy h4 {
+      color: #fff;
+      font-size: 16px;
+      margin: 24px 0 12px 0;
+      opacity: 0.9;
+    }
+
+    .detail-copy p {
+      margin-bottom: 18px;
+    }
+
+    .detail-copy ul {
+      padding-left: 20px;
+      margin-bottom: 18px;
+      list-style-type: square;
+    }
+
+    .detail-copy li {
+      margin-bottom: 10px;
+    }
+
+    .eng-title {
+      font-family: var(--font-mono);
+      color: var(--bd-cyan);
+      font-size: 13px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .term-code {
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3) !important;
+      border-left: 2px solid rgba(0, 229, 255, 0.3);
+      border-radius: 0 4px 4px 0;
+      margin-top: 1rem;
+    }
+
+    .impact-section {
+      text-align: center;
+      margin-top: 80px;
+      padding: 80px 0;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      background: transparent;
+    }
+
+    .impact-section h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    .impact-section ul {
+      list-style: none;
+      font-size: 18px;
+      line-height: 2.2;
+      margin-bottom: 40px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      padding: 0;
+    }
+
+    .impact-section ul li::before {
+      content: ">";
+      color: #00ff64;
+      margin-right: 15px;
+      font-family: var(--font-mono);
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .impact-ready {
+      font-size: 20px;
+      font-family: var(--font-mono);
+      color: var(--bd-cyan);
+      padding: 15px 30px;
+      border: 1px solid var(--bd-cyan);
+      background: rgba(0, 229, 255, 0.05);
+      display: inline-block;
+      transition: all 0.3s;
+    }
+
+    .impact-ready:hover {
+      background: rgba(0, 229, 255, 0.2);
+      transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+      text-shadow: 0 0 10px var(--bd-cyan);
+    }
+
+    .stack-box {
+      margin-top: 20px;
+      padding: 2.5rem;
+      border-left: 3px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .stack-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stack-item {
+      padding: 10px 18px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-note {
+      padding: 4rem 0;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 13px;
+      font-family: var(--font-mono);
+      text-align: center;
+      border-top: none;
+    }
+
+    .timeline-item.core-work {
+      border-left-color: #00ff64;
+    }
+
+    .core-label {
+      display: inline-block;
+      background: rgba(0, 255, 100, 0.1);
+      color: #00ff64;
+      font-family: var(--font-mono);
+      font-weight: bold;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      margin-left: -3rem;
+    }
+
+    @media (max-width: 960px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="overlay-grid"></div>
+
+  <nav>
+    <!-- Logo Area -->
+    <div class="nav-logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
+        <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" stroke="#8b5cf6" stroke-width="6" stroke-linejoin="round" fill="rgba(139, 92, 246, 0.1)"/>
+            <path d="M50 5 L50 50 L90 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M50 50 L10 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M10 27 L50 50 L90 27" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" stroke-dasharray="4 4"/>
+            <circle cx="50" cy="50" r="4" fill="#00e5ff"/>
+        </svg>
+        <span style="color: #fff; font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; letter-spacing: 1px;">RSY</span>
+    </div>
+
+    <div style="display: flex; align-items: stretch; gap: 0.5rem; height: 100%;">
+      <a href="index.html" class="nav-archive-btn lang-text" data-ko="소개" data-en="INTRO">소개</a>
+      <a href="project1.html" class="nav-archive-btn lang-text" data-ko="2026 프로젝트" data-en="2026 Projects">2026
+        프로젝트</a>
+      <a href="project2.html" class="nav-archive-btn lang-text" data-ko="2025 프로젝트" data-en="2025 Projects">2025
+        프로젝트</a>
+      <a href="board.html" class="nav-archive-btn lang-text" data-ko="Q&A 게시판" data-en="Q&A Board">Q&A 게시판</a>
+      <a href="contact.html" class="nav-archive-btn lang-text" data-ko="CONTACT" data-en="CONTACT">CONTACT</a>
+      <div class="lang-pill" style="margin-left: 0.5rem;">
+        <div class="pill-bg"></div>
+        <button class="pill-btn active" onclick="setLang('ko')">KO</button>
+        <button class="pill-btn" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <main>
+      <section class="archive-hero" style="position: relative;">
+        <div style="position: relative; z-index: 2;">
+          <div class="badge">2026 Project Archive</div>
+
+          <h1 class="lang-text" data-ko="2026 Portfolio"
+            data-en="2026 Portfolio">
+            2026 Portfolio
+          </h1>
+          <p class="hero-desc lang-text"
+            data-ko="초안 설계부터 회로 구성, 제어 코드, CAN 통신 구조까지.<br>시뮬레이션이 아닌 물리 하드웨어 계층과 애플리케이션 계층을 수직 통합한,<br><strong style='color: #ffea00; font-weight: 800; text-shadow: 0 0 12px #ffea00, 0 0 25px rgba(255,234,0,0.8); letter-spacing: 1px;'>휴머노이드</strong> 로봇 관제를 위한 시스템 안정성 구축 기록입니다."
+            data-en="From draft design to circuit configuration, control code, and CAN communication structure.<br>This is a record of building system stability for <strong style='color: #ffea00; font-weight: 800; text-shadow: 0 0 12px #ffea00, 0 0 25px rgba(255,234,0,0.8); letter-spacing: 1px;'>humanoid</strong> robot control,<br>vertically integrating physical hardware and application layers, not simulations.">
+            초안 설계부터 회로 구성, 제어 코드, CAN 통신 구조까지.<br>
+            시뮬레이션이 아닌 물리 하드웨어 계층과 애플리케이션 계층을 수직 통합한,<br>
+            <strong style="color: #ffea00; font-weight: 800; text-shadow: 0 0 12px #ffea00, 0 0 25px rgba(255,234,0,0.8); letter-spacing: 1px;">휴머노이드</strong> 로봇 관제를 위한 시스템 안정성 구축 기록입니다.
+          </p>
+        </div>
+
+        <!-- Reference Robot Image (Massive Background Layer) -->
+        <div class="hero-image"
+          style="position: absolute; right: calc(50% - 50vw); top: 0; bottom: 0; height: 100%; width: 65vw; display: flex; align-items: stretch; z-index: 0; pointer-events: none; opacity: 1;">
+          <img src="5.png"
+            style="width: 100%; height: 100%; object-fit: cover; object-position: center center; filter: drop-shadow(0 0 50px rgba(0, 229, 255, 0.4)); mix-blend-mode: screen; mask-image: linear-gradient(to right, transparent 0%, black 45%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 45%, black 100%);"
+            alt="Robot Reference">
+        </div>
+      </section>
+
+      <div class="nav-row">
+        <a class="btn btn-secondary lang-text" href="https://github.com/skype1121/humanoid_mk1" target="_blank"
+          rel="noopener noreferrer" data-ko="GitHub 보기" data-en="View GitHub">GitHub 보기</a>
+        <a class="btn btn-secondary lang-text" href="https://eclass.dongyang.ac.kr/login.php" target="_blank"
+          rel="noopener noreferrer" data-ko="동양미래대학교" data-en="Dongyang Mirae Univ.">동양미래대학교</a>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title lang-text" data-ko="핵심 KPI 지표" data-en="Core KPI Metrics">핵심 KPI 지표</h2>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3>[ SYSTEM SCALE ]</h3>
+            <p><strong>10 DOF</strong><br>CAN BUS Protocol<br>AK70-10 & Dynamixel</p>
+          </div>
+          <div class="summary-card">
+            <h3>[ CONTROL LOOP ]</h3>
+            <p><strong>1 kHz</strong><br>RT Tuned Kernel<br>14 µs Worst Latency</p>
+          </div>
+          <div class="summary-card">
+            <h3>[ ARCHITECTURE ]</h3>
+            <p><strong>ROS2 Humble</strong><br>Dockerized Env<br>Multi-thread Executor</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title lang-text" data-ko="진행 기록" data-en="Progress Log">진행 기록</h2>
+
+        <div class="timeline">
+
+          <!-- STEP 01 -->
+          <article class="timeline-item stage-cyan">
+            <div class="timeline-head">
+              <div class="timeline-date">STEP 01</div>
+              <div class="timeline-title lang-text" data-ko="하드웨어 초기 검증 (Prototype)"
+                data-en="Hardware Initial Validations (Prototype)">하드웨어 초기 검증 (Prototype)</div>
+              <div class="timeline-text" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch;">
+                <div style="flex: 1 1 350px; min-width: 0; padding-bottom: 0.5rem;">
+                  <div class="pff-box">
+                    <div><span class="p-label" data-ko="[ PROBLEM ]" data-en="[ PROBLEM ]">[ PROBLEM ]</span> <span
+                        class="lang-text" data-ko="다관절 기구적 설계 결함 감지 및 치수 확인 불가"
+                        data-en="Uncertain mechanical joint flaws and dimension checks">다관절 기구적 설계 결함 감지 및 치수 확인
+                        불가</span></div>
+                    <div><span class="f-label" data-ko="[ FAILURE ]" data-en="[ FAILURE ]">[ FAILURE ]</span> <span
+                        class="lang-text" data-ko="시각적 CAD만 의존 시 모터 간 간섭 및 충돌 등 하드웨어 사고 우려"
+                        data-en="Hardware accidents upon collision if relying solely on visual CAD">시각적 CAD만 의존 시 모터 간
+                        간섭 및 충돌 등 하드웨어 사고 우려</span></div>
+                    <div><span class="x-label" data-ko="[ FIX ]" data-en="[ FIX ]">[ FIX ]</span> <span
+                        class="lang-text" data-ko="저비용 3D 프린팅으로 1차 프로토타입 출력 및 실물 가조립 평가"
+                        data-en="Printed raw rapid 3D prototypes to estimate physical dimensions">저비용 3D 프린팅으로 1차 프로토타입
+                        출력 및 실물 가조립 평가</span></div>
+                  </div>
+                  <div style="margin-top: 1.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 8px; height: 8px; background: var(--bd-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--bd-cyan); animation: pulseBadge 2s infinite;"></div>
+                      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--bd-cyan); letter-spacing: 2px;">[ RECORD_LOG ]</span>
+                      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,229,255,0.3), transparent);"></div>
+                  </div>
+                  <div class="lang-text" style="margin-top: 0.5rem; line-height: 1.6; word-break: keep-all;"
+                    data-ko="초기 설계 단계에서 부품 간섭과 모터 체결 부위를 파악하기 위해, 프로토타입 다리 관절을 3D 프린터로 대충 출력하여 물리적 치수와 역학적 구동 범위를 1차 검증했습니다."
+                    data-en="Printed basic 3D prototypes of leg joints to verify mechanical extents, physical dimensions, and clearance to avoid assembly conflicts early in the design stage.">
+                    초기 설계 단계에서 부품 간섭과 모터 체결 부위를 파악하기 위해, 프로토타입 다리 관절을 3D 프린터로 대충 출력하여 물리적 치수와 역학적 구동 범위를 1차 검증했습니다.
+                  </div>
+                </div>
+
+                <div style="flex: 0 1 350px; min-width: 250px; position: relative; min-height: 220px;">
+                  <img src="7.PNG" alt="3D 프로토타입 가조립"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);">
+                </div>
+              </div>
+              <div class="tag-row">
+                <span class="tag">3D Prototype</span>
+                <span class="tag">Dimension Check</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- STEP 02 -->
+          <article class="timeline-item stage-cyan">
+            <div class="timeline-head">
+              <div class="timeline-date">STEP 02</div>
+              <div class="timeline-title lang-text" data-ko="SW 인프라 & 데이터 파이프라인 (ROS2)"
+                data-en="SW Infrastructure & Data Pipeline (ROS2)">SW 인프라 & 데이터 파이프라인 (ROS2)</div>
+              <div class="timeline-text" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch;">
+                <div style="flex: 1 1 350px; min-width: 0; padding-bottom: 0.5rem;">
+                  <div class="pff-box">
+                    <div><span class="p-label" data-ko="[ PROBLEM ]" data-en="[ PROBLEM ]">[ PROBLEM ]</span> <span
+                        class="lang-text" data-ko="장비 간 의존성 문제 및 비표준 통신 규격"
+                        data-en="Inter-device dependency issues and non-standard comm protocols">장비 간 의존성 문제 및 비표준 통신
+                        규격</span></div>
+                    <div><span class="f-label" data-ko="[ FAILURE ]" data-en="[ FAILURE ]">[ FAILURE ]</span> <span
+                        class="lang-text" data-ko="상태 값 모니터링 누락 시 즉각적인 디버깅 불가"
+                        data-en="Absence of observable status tracing causing instant debug failures">상태 값 모니터링 누락 시
+                        즉각적인 디버깅 불가</span></div>
+                    <div><span class="x-label" data-ko="[ FIX ]" data-en="[ FIX ]">[ FIX ]</span> <span
+                        class="lang-text" data-ko="ROS2 Topic을 통한 노드 간 상태/제어 데이터 통신 루프 최적화"
+                        data-en="ROS2 Node optimization via solid Topic communication loops">ROS2 Topic을 통한 노드 간 상태/제어
+                        데이터 통신 루프 최적화</span></div>
+                  </div>
+                  <div style="margin-top: 0.5rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 8px; height: 8px; background: var(--bd-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--bd-cyan); animation: pulseBadge 2s infinite;"></div>
+                      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--bd-cyan); letter-spacing: 2px;">[ RECORD_LOG ]</span>
+                      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,229,255,0.3), transparent);"></div>
+                  </div>
+                  <div class="lang-text" style="margin-top: 0.2rem; line-height: 1.6; word-break: keep-all;"
+                    data-ko="Docker 컨테이너 내에서 ROS2 Humble 워크스페이스를 패키징하고, 실제로 각 모터 노드와 센서 노드를 묶어 실시간으로 전송되는 로스(ROS) 토픽을 디버깅/구독(Subscribe)하는 파이프라인이 완성되었습니다."
+                    data-en="Packaged ROS2 Humble inside isolated Docker containers, validating the data pipelines by successfully subscribing and reading real-time ROS Topics broadcasted directly from operating nodes.">
+                    Docker 컨테이너 내에서 ROS2 Humble 워크스페이스를 패키징하고, 실제로 각 모터 노드와 센서 노드를 묶어 실시간으로 전송되는 로스(ROS) 토픽을
+                    디버깅/구독(Subscribe)하는 파이프라인이 완성되었습니다.</div>
+                </div>
+
+                <div style="flex: 0 1 350px; min-width: 250px; position: relative; min-height: 220px;">
+                  <img src="8.PNG" alt="ROS Topic 구독 읽기"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);">
+                </div>
+              </div>
+              <div class="tag-row">
+                <span class="tag">ROS2 Humble</span>
+                <span class="tag">Topic Subscribe</span>
+                <span class="tag">Docker</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- STEP 03 (New) -->
+          <article class="timeline-item stage-blue">
+            <div class="timeline-head">
+              <div class="timeline-date">STEP 03</div>
+              <div class="timeline-title lang-text" data-ko="시뮬레이션 (Isaac Sim & MuJoCo)"
+                data-en="Simulation (Isaac Sim & MuJoCo)">시뮬레이션 (Isaac Sim & MuJoCo)</div>
+              <div class="timeline-text" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch;">
+                <div style="flex: 1 1 350px; min-width: 0; padding-bottom: 0.5rem;">
+                  <div class="pff-box">
+                    <div><span class="p-label" data-ko="[ PROBLEM ]" data-en="[ PROBLEM ]">[ PROBLEM ]</span> <span
+                        class="lang-text" data-ko="하드웨어 파손 위험 및 학습 데이터 절대적 부족"
+                        data-en="Risk of hardware damage and absolute lack of training data">하드웨어 파손 위험 및 학습 데이터 절대적
+                        부족</span></div>
+                    <div><span class="f-label" data-ko="[ FAILURE ]" data-en="[ FAILURE ]">[ FAILURE ]</span> <span
+                        class="lang-text" data-ko="실물 구동 직진입 시 반복적인 모터 소모 및 기구부 파손 발생"
+                        data-en="Rapid burnout and hardware crackdowns if proceeding straight to real motors">실물 구동 직진입
+                        시 반복적인 모터 소모 및 기구부 파손 발생</span></div>
+                    <div><span class="x-label" data-ko="[ FIX ]" data-en="[ FIX ]">[ FIX ]</span> <span
+                        class="lang-text" data-ko="가상 가상환경 모델링(MJCF) 후 로봇 다리(Leg) 동작 무한 검증"
+                        data-en="Virtual leg physics validations leveraging robust MJCF models in sim">가상 가상환경 모델링(MJCF)
+                        후 로봇 다리(Leg) 동작 무한 검증</span></div>
+                  </div>
+                  <div style="margin-top: 0.5rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 8px; height: 8px; background: var(--bd-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--bd-cyan); animation: pulseBadge 2s infinite;"></div>
+                      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--bd-cyan); letter-spacing: 2px;">[ RECORD_LOG ]</span>
+                      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,229,255,0.3), transparent);"></div>
+                  </div>
+                  <div class="lang-text" style="margin-top: 0.2rem; line-height: 1.6; word-break: keep-all;"
+                    data-ko="SolidWorks 모델을 MJCF로 정밀하게 변환하여 가상 컴퓨팅 환경 속에 불러온 뒤, 실제 로봇 다리가 움직여야 할 Stand-up 및 보행 파라미터 연산의 물리적인 거동 가능성을 안전하게 테스트하고 있습니다."
+                    data-en="Tested exact leg locomotion and stand-up parameters inside a stable simulation space (MuJoCo/Isaac) using highly converted dynamic MJCF models minimizing hardware burnout stakes.">
+                    SolidWorks 모델을 MJCF로 정밀하게 변환하여 가상 컴퓨팅 환경 속에 불러온 뒤, 실제 로봇 다리가 움직여야 할 Stand-up 및 보행 파라미터 연산의 물리적인 거동
+                    가능성을 안전하게 테스트하고 있습니다.</div>
+                </div>
+
+                <div style="flex: 0 1 350px; min-width: 250px; position: relative; min-height: 220px;">
+                  <img src="10.PNG" alt="가상환경 물리 로봇 다리 검증"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);">
+                </div>
+              </div>
+              <div class="tag-row">
+                <span class="tag">Isaac Sim</span>
+                <span class="tag">MuJoCo</span>
+                <span class="tag">Virtual Validation</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- STEP 04 -->
+          <article class="timeline-item stage-blue">
+            <div class="timeline-head">
+              <div class="timeline-date">STEP 04</div>
+              <div class="timeline-title lang-text" data-ko="실시간성 최적화 (Real-time Tuning)"
+                data-en="Real-time Optimization (Real-time Tuning)">실시간성 최적화 (Real-time Tuning)</div>
+              <div class="timeline-text" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch;">
+                <div style="flex: 1 1 350px; min-width: 0; padding-bottom: 0.5rem;">
+                  <div class="pff-box">
+                    <div><span class="p-label" data-ko="[ PROBLEM ]" data-en="[ PROBLEM ]">[ PROBLEM ]</span> <span
+                        class="lang-text" data-ko="OS 소프트웨어 기반 무작위 지연(Latency)"
+                        data-en="Random latency rooted in OS software">OS 소프트웨어 기반 무작위 지연(Latency)</span></div>
+                    <div><span class="f-label" data-ko="[ FAILURE ]" data-en="[ FAILURE ]">[ FAILURE ]</span> <span
+                        class="lang-text" data-ko="10ms 통신 지연 누적 시 로봇 고속 제어 발산 발생"
+                        data-en="Robot high-speed control divergence occurs upon 10ms comm delay buildup">10ms 통신 지연 누적 시
+                        로봇 고속 제어 발산 발생</span></div>
+                    <div><span class="x-label" data-ko="[ FIX ]" data-en="[ FIX ]">[ FIX ]</span> <span class="lang-text"
+                        data-ko="CPU isolation & RT-Scheduler 적용하여 14µs Latency 보장"
+                        data-en="Ensured 14µs latency bound employing CPU isolation & RT Scheduler">CPU isolation &
+                        RT-Scheduler 적용하여 14µs Latency 보장</span></div>
+                  </div>
+                  <div style="margin-top: 0.5rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 8px; height: 8px; background: var(--bd-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--bd-cyan); animation: pulseBadge 2s infinite;"></div>
+                      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--bd-cyan); letter-spacing: 2px;">[ RECORD_LOG ]</span>
+                      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,229,255,0.3), transparent);"></div>
+                  </div>
+                  <div class="lang-text" style="margin-top: 0.2rem; line-height: 1.6; word-break: keep-all;"
+                    data-ko="운영체제 단에서 커널 레이턴시를 제어하기 위한 실시간성(RT) 튜닝을 거쳐 안정적인 1kHz 제어 루프를 방어했습니다."
+                    data-en="Secured a stable 1kHz control loop by applying Real-Time (RT) tuning to control kernel latencies at the OS level.">
+                    운영체제 단에서 커널 레이턴시를 제어하기 위한 실시간성(RT) 튜닝을 거쳐 안정적인 1kHz 제어 루프를 방어했습니다.</div>
+                </div>
+
+                <div style="flex: 0 1 350px; min-width: 250px; position: relative; min-height: 220px;">
+                  <img src="13.png" alt="실시간성 최적화"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- STEP 05 -->
+          <article class="timeline-item stage-green core-work">
+            <div class="core-label">CORE INTEGRATION</div>
+            <div class="timeline-head">
+              <div class="timeline-date">STEP 05</div>
+              <div class="timeline-title lang-text" data-ko="시스템 통합 (Hardware Integration)"
+                data-en="System Integration (Hardware Integration)">시스템 통합 (Hardware Integration)</div>
+              <div class="timeline-text" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch;">
+                <div style="flex: 1 1 350px; min-width: 0; padding-bottom: 0.5rem;">
+                  <div class="pff-box">
+                    <div><span class="p-label" data-ko="[ PROBLEM ]" data-en="[ PROBLEM ]">[ PROBLEM ]</span> <span
+                        class="lang-text" data-ko="시뮬레이션과 실제 물리 구동 사이의 극심한 제어 기술 괴리"
+                        data-en="Extreme control tech gap between simulation and actual physical actuation">시뮬레이션과 실제 물리
+                        구동 사이의 극심한 제어 기술 괴리</span></div>
+                    <div><span class="f-label" data-ko="[ FAILURE ]" data-en="[ FAILURE ]">[ FAILURE ]</span> <span
+                        class="lang-text" data-ko="물리 모터 ROS2 연동 부재로 인한 명령 하달 실패"
+                        data-en="Command transmission fail due to lack of ROS2 physical motor bridging">물리 모터 ROS2 연동
+                        부재로 인한 명령 하달 실패</span></div>
+                    <div><span class="x-label" data-ko="[ FIX ]" data-en="[ FIX ]">[ FIX ]</span> <span
+                        class="lang-text" data-ko="AK70 CAN 드라이버 네이티브 통합 및 실물 구동 검증 완료"
+                        data-en="Native integration of AK70 CAN driver & verified real-world driving run">AK70 CAN 드라이버
+                        네이티브 통합 및 실물 구동 검증 완료</span></div>
+                  </div>
+                  <div style="margin-top: 0.5rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 8px; height: 8px; background: var(--bd-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--bd-cyan); animation: pulseBadge 2s infinite;"></div>
+                      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--bd-cyan); letter-spacing: 2px;">[ RECORD_LOG ]</span>
+                      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,229,255,0.3), transparent);"></div>
+                  </div>
+                  <div class="lang-text" style="margin-top: 0.2rem; line-height: 1.6; word-break: keep-all;"
+                    data-ko="AK70 모터를 제어하기 위한 SocketCAN 기반 C++ 드라이버 로직을 래핑하고, ROS2 노드 환경에서 직접 명령을 보내 물리 하드웨어가 의도치 않은 떨림 없이 동작하는 성과를 이끌었습니다."
+                    data-en="Wrapped C++ SocketCAN driver logic to control AK70 motors, dispatching direct commands from ROS2 node scopes to achieve steady and proven physical hardware movements without unwanted jittering.">
+                    AK70 모터를 제어하기 위한 SocketCAN 기반 C++ 드라이버 로직을 래핑하고, ROS2 노드 환경에서 직접 명령을 보내 물리 하드웨어가 의도치 않은 떨림 없이 동작하는
+                    성과를 이끌었습니다.</div>
+                </div>
+
+                <div style="flex: 0 1 350px; min-width: 250px; position: relative; min-height: 220px;">
+                  <img src="6.PNG" alt="AK모터 구동 환경"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);">
+                </div>
+              </div>
+              <div class="tag-row">
+                <span class="tag">AK70 CAN Driver</span>
+                <span class="tag">Hardware Test Success</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- STEP 06 (New) -->
+          <article class="timeline-item stage-green core-work">
+            <div class="timeline-head">
+              <div class="timeline-date">STEP 06</div>
+              <div class="timeline-title lang-text" data-ko="시각 인지 및 센서 융합 (D455 Vision)"
+                data-en="Vision Perception & Sensor Fusion (D455 Vision)">시각 인지 및 센서 융합 (D455 Vision)</div>
+              <div class="timeline-text" style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: stretch;">
+                <div style="flex: 1 1 350px; min-width: 0; padding-bottom: 0.5rem;">
+                  <div class="pff-box">
+                    <div><span class="p-label" data-ko="[ PROBLEM ]" data-en="[ PROBLEM ]">[ PROBLEM ]</span> <span
+                        class="lang-text" data-ko="운동학 파라미터만으로는 동적 지형 장애물 파악의 근본적 불가"
+                        data-en="Kinematics alone blind to terrain obstacles entirely">운동학 파라미터만으로는 동적 지형 장애물 파악의 근본적
+                        불가</span></div>
+                    <div><span class="f-label" data-ko="[ FAILURE ]" data-en="[ FAILURE ]">[ FAILURE ]</span> <span
+                        class="lang-text" data-ko="전면부 공간 인지 누락으로 인한 로봇 주행성 100% 붕괴 위험"
+                        data-en="Critical walking breakdowns from zero spatial front-facing perceptions">전면부 공간 인지 누락으로
+                        인한 로봇 주행성 100% 붕괴 위험</span></div>
+                    <div><span class="x-label" data-ko="[ FIX ]" data-en="[ FIX ]">[ FIX ]</span> <span
+                        class="lang-text" data-ko="Intel RealSense D455 심도(Depth) 카메라 연계 및 입체 공간 인지"
+                        data-en="Solidified spatial vision pairing Intel RealSense D455 depth cameras">Intel RealSense
+                        D455 심도(Depth) 카메라 연계 및 입체 공간 인지</span></div>
+                  </div>
+                  <div style="margin-top: 0.5rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 10px;">
+                      <div style="width: 8px; height: 8px; background: var(--bd-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--bd-cyan); animation: pulseBadge 2s infinite;"></div>
+                      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--bd-cyan); letter-spacing: 2px;">[ RECORD_LOG ]</span>
+                      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,229,255,0.3), transparent);"></div>
+                  </div>
+                  <div class="lang-text" style="margin-top: 0.2rem; line-height: 1.6; word-break: keep-all;"
+                    data-ko="비전 모델과 물리 제어의 결합을 준비하며 Intel RealSense D455 뎁스 카메라로 깊이 정보를 추출하고 공간을 인지하는 과정을 직접 확인하고 도입했습니다."
+                    data-en="Proved out depth extraction logic leveraging Intel RealSense D455 stereo devices, heavily bridging visual arrays directly onto robust physical actions for reliable obstacle processing.">
+                    비전 모델과 물리 제어의 결합을 준비하며 Intel RealSense D455 뎁스 카메라로 깊이 정보를 추출하고 공간을 인지하는 과정을 직접 확인하고 도입했습니다.</div>
+                </div>
+
+                <div style="flex: 0 1 350px; min-width: 250px; position: relative; min-height: 220px;">
+                  <img src="9.PNG" alt="D455 뎁스 스캐닝 시연"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);">
+                </div>
+              </div>
+              <div class="tag-row">
+                <span class="tag">RealSense D455</span>
+                <span class="tag">Depth Vision</span>
+                <span class="tag">Embodiement</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- NEXT -->
+          <article class="timeline-item stage-green">
+            <div class="timeline-head">
+              <div class="timeline-date">NEXT</div>
+              <div class="timeline-title lang-text" data-ko="전신 보행 알고리즘 도입" data-en="Whole-Body Walking Algorithm">전신 보행
+                알고리즘 도입</div>
+              <div class="timeline-text">
+                <div class="pff-box">
+                  <div><span class="p-label" data-ko="[ PROBLEM ]" data-en="[ PROBLEM ]">[ PROBLEM ]</span> <span
+                      class="lang-text" data-ko="현실 외란을 버티기 위한 안정적인 최신 보행 제어 모델 필요"
+                      data-en="Need for advanced stable walking control models facing dynamic shocks">현실 외란을 버티기 위한 안정적인
+                      최신 보행 제어 모델 필요</span></div>
+                  <div><span class="f-label" data-ko="[ FAILURE ]" data-en="[ FAILURE ]">[ FAILURE ]</span> <span
+                      class="lang-text" data-ko="정해진 궤적 매핑만으로는 물리적 변수와 충격 극복이 불가"
+                      data-en="Rigid trajectory bindings alone fail addressing physical collision variables">정해진 궤적
+                      매핑만으로는 물리적 변수와 충격 극복이 불가</span></div>
+                  <div><span class="x-label" data-ko="[ FIX ]" data-en="[ FIX ]">[ FIX ]</span> <span class="lang-text"
+                      data-ko="강화학습 기반의 안정적 보행 및 고도화 인지 피드백 제어 예정"
+                      data-en="Approaching stable walking and robust perceptive feedback by RL">강화학습 기반의 안정적 보행 및 고도화 인지
+                      피드백 제어 예정</span></div>
+                </div>
+                <div style="margin-top: 0.5rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 8px; height: 8px; background: var(--bd-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--bd-cyan); animation: pulseBadge 2s infinite;"></div>
+                    <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--bd-cyan); letter-spacing: 2px;">[ RECORD_LOG ]</span>
+                    <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(0,229,255,0.3), transparent);"></div>
+                </div>
+                <span class="lang-text" style="display: block; margin-top: 0.2rem; line-height: 1.6; word-break: keep-all;"
+                  data-ko="이제 확립한 센서 노드 네트워크와 물리적 구동 드라이버 층을 기반으로, 강화학습(RL) 기반 최신 모델을 하드웨어에 올려 안정적인 보행(Walking)을 이루어 낼 계획입니다."
+                  data-en="Driven upon the firmly established sensor node networks and physiological driver tiers, I plan to overlay the contemporary Reinforcement Learning (RL) models into hardware bridging the actualized functional walking milestones.">이제
+                  확립한 센서 노드 네트워크와 물리적 구동 드라이버 층을 기반으로, 강화학습(RL) 기반 최신 모델을 하드웨어에 올려 안정적인 보행(Walking)을 이루어 낼 계획입니다.</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="section impact-section" id="proof-impact">
+        <h2 class="section-title lang-text" data-ko="WHAT THIS PROVES" data-en="WHAT THIS PROVES"
+          style="text-align:center; color:#fff; border:none; text-shadow:none;">WHAT THIS PROVES</h2>
+        <ul>
+          <li class="lang-text" data-ko="실제 모터 제어 하드웨어 시스템을 구축할 능력이 있음"
+            data-en="I can build real motor control hardware systems">실제 모터 제어 하드웨어 시스템을 구축할 능력이 있음</li>
+          <li class="lang-text" data-ko="엄격한 실시간성과 레이턴시를 제어할 수 있음"
+            data-en="I can strictly manage real-time and latency constraints">엄격한 실시간성과 레이턴시를 제어할 수 있음</li>
+          <li class="lang-text" data-ko="하드웨어와 소프트웨어를 네이티브로 직접 통합할 수 있음"
+            data-en="I can natively integrate hardware and software directly">하드웨어와 소프트웨어를 네이티브로 직접 통합할 수 있음</li>
+        </ul>
+        <a href="contact.html" class="impact-ready lang-text" data-ko="> 실제 환경에서 살아남는 시스템을 만들 준비가 되었습니다_"
+          data-en="> Ready for real-world robotics systems_"
+          style="text-decoration:none; display:inline-block; transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);">> 실제
+          환경에서 살아남는 시스템을 만들 준비가 되었습니다_</a>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title lang-text" data-ko="기술 스택" data-en="Tech Stack">기술 스택</h2>
+        <div class="stack-box">
+          <p class="lang-text" style="color:#d7e2d9; line-height:1.9; font-size:15px;"
+            data-ko="현재 프로젝트에서 구축에 직접 활용한 핵심 기술입니다."
+            data-en="These are the core technologies I directly utilized to build this project.">
+            현재 프로젝트에서 구축에 직접 활용한 핵심 기술입니다.
+          </p>
+          <div class="stack-list">
+            <span class="stack-item">ROS2 Humble</span>
+            <span class="stack-item">Python / C++</span>
+            <span class="stack-item">Docker</span>
+            <span class="stack-item">Jetson Orin Nano</span>
+            <span class="stack-item">SocketCAN</span>
+            <span class="stack-item">AK70-10</span>
+            <span class="stack-item">Linux Realtime Tuning</span>
+            <span class="stack-item">Hardware Integration</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">
+        humanoid_mk1 development archive · built by Ryu Seung Yoon
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Accordion optimized logic
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach((accordion) => {
+      const toggle = accordion.querySelector('.accordion-toggle');
+      toggle.addEventListener('click', () => {
+        accordion.classList.toggle('active');
+        const icon = accordion.querySelector('.accordion-icon');
+        if (accordion.classList.contains('active')) {
+          icon.innerText = '-';
+        } else {
+          icon.innerText = '+';
+        }
+      });
+    });
+
+    // Auto-initialize text languages
+    if (window.setLang) {
+      const currentLang = localStorage.getItem('sys1_lang') || 'ko';
+      window.setLang(currentLang);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System-1 Robot Control | Cinematic Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="overlay-grid"></div>
+
+    <nav>
+        <!-- Logo Area -->
+        <div class="nav-logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
+            <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" stroke="#8b5cf6" stroke-width="6" stroke-linejoin="round" fill="rgba(139, 92, 246, 0.1)"/>
+                <path d="M50 5 L50 50 L90 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M50 50 L10 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M10 27 L50 50 L90 27" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" stroke-dasharray="4 4"/>
+                <circle cx="50" cy="50" r="4" fill="#00e5ff"/>
+            </svg>
+            <span style="color: #fff; font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; letter-spacing: 1px;">RSY</span>
+        </div>
+
+        <div style="display: flex; align-items: stretch; gap: 0.5rem; height: 100%;">
+            <a href="index.html" class="nav-archive-btn lang-text" data-ko="소개" data-en="INTRO">소개</a>
+            <a href="project1.html" class="nav-archive-btn lang-text" data-ko="2026 프로젝트" data-en="2026 Projects">2026
+                프로젝트</a>
+            <a href="project2.html" class="nav-archive-btn lang-text" data-ko="2025 프로젝트" data-en="2025 Projects">2025
+                프로젝트</a>
+            <a href="board.html" class="nav-archive-btn lang-text" data-ko="Q&A 게시판" data-en="Q&A Board">Q&A 게시판</a>
+            <a href="contact.html" class="nav-archive-btn lang-text" data-ko="CONTACT" data-en="CONTACT">CONTACT</a>
+            <div class="lang-pill" style="margin-left: 0.5rem;">
+                <div class="pill-bg"></div>
+                <button class="pill-btn active" onclick="setLang('ko')">KO</button>
+                <button class="pill-btn" onclick="setLang('en')">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="scroll-container">
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-content" style="position: relative; z-index: 2; border-radius: 0;">
+                <div class="subtitle lang-text" data-ko="보스턴 다이내믹스 System-1 지원자"
+                    data-en="Boston Dynamics System-1 Applicant">보스턴 다이내믹스 System-1 지원자</div>
+                <h1 id="typing-slogan" class="slogan"></h1>
+
+                <div class="intro-block mt-4">
+                    <div class="human-profile">
+                        <div class="human-name lang-text" style="font-size: 1.15rem; margin-bottom: 0.5rem;"
+                            data-ko="<span style='font-size: 1.3em; font-weight: 900; letter-spacing: 6px; color: #00ff64; text-shadow: 0 0 12px rgba(0,255,100,0.5);'>류 승 윤</span> &nbsp;&mdash;&nbsp; 로봇 설계 제어 통합 엔지니어"
+                            data-en="<span style='font-size: 1.3em; font-weight: 900; letter-spacing: 2px; color: #00ff64; text-shadow: 0 0 12px rgba(0,255,100,0.5);'>Seungyoon Ryu</span> &nbsp;&mdash;&nbsp; Robot Design & Control Integration Engineer">
+                            <span
+                                style="font-size: 1.3em; font-weight: 900; letter-spacing: 6px; color: #00ff64; text-shadow: 0 0 12px rgba(0,255,100,0.5);">류
+                                승 윤</span> &nbsp;&mdash;&nbsp; 로봇 설계 제어 통합 엔지니어
+                        </div>
+                        <div class="human-slogan lang-text" data-ko="&quot;나는 먼저 생각하지 않고, 먼저 반응하는 로봇을 만듭니다.&quot;"
+                            data-en="&quot;I build robots that react first, not think first.&quot;">"나는 먼저 생각하지 않고, 먼저
+                            반응하는 로봇을 만듭니다."</div>
+                        <div class="human-stats"
+                            style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 15px;">
+                            <div class="human-stat"><strong><span class="lang-text" data-ko="위치:"
+                                        data-en="Location:">위치:</span></strong> <span class="lang-text"
+                                    data-ko="대한민국 서울" data-en="Seoul, South Korea">대한민국 서울</span></div>
+                            <div class="human-stat"><strong><span class="lang-text" data-ko="연락처:"
+                                        data-en="Contact:">연락처:</span></strong> <span id="email-copy"
+                                    style="color:#0f0; font-size: calc(100% + 2px); font-weight: bold; cursor: pointer; text-decoration: underline; padding: 2px 6px; border-radius: 4px; transition: all 0.2s;"
+                                    onmouseover="this.style.background='rgba(0,255,0,0.1)'; this.style.boxShadow='0 0 8px rgba(0,255,0,0.5)';"
+                                    onmouseout="this.style.background='none'; this.style.boxShadow='none';">skype1121@dongyang.ac.kr</span>
+                            </div>
+                            <div class="human-stat"><strong><span class="lang-text" data-ko="전문 :"
+                                        data-en="Specialty :">전문 :</span></strong> <span class="lang-text"
+                                    data-ko="로봇 제어 / 설계"
+                                    data-en="Robot Control / Design">로봇 제어 / 설계</span></div>
+                            <div class="human-stat"><strong><span class="lang-text" data-ko="핵심 :"
+                                        data-en="Core :">핵심 :</span></strong> <span class="lang-text"
+                                    data-ko="휴머노이드 하체 제어 / 실시간 제어 및 안정화 2026" data-en="Humanoid Lower-body Control / Real-time Stabilization 2026">휴머노이드 하체 제어 / 실시간 제어 및 안정화 2026</span></div>
+                            <div class="human-stat"><strong><span class="lang-text"
+                                        data-ko="스택:" data-en="Stack:">스택:</span></strong> ROS2 / CAN / Jetson</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-cta" id="hero-cta"
+                    style="opacity:0; transform: translateY(20px); transition: all 1s ease 0.6s; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="cta-btn neon-yellow lang-text" data-ko="철학 & 아키텍처 탐색"
+                        data-en="Explore Philosophy & Architecture"
+                        onclick="document.getElementById('why-build').scrollIntoView({behavior:'smooth'})">철학 & 아키텍처
+                        탐색</button>
+                    <a href="https://github.com/skype1121" class="github-card" target="_blank"
+                        style="background:var(--panel-bg); border:1px solid var(--border-color); padding: 0.5rem 1.5rem; gap: 1rem; border-radius: 4px; min-width: 260px; margin: 0; align-items: center; justify-content: center;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--bd-cyan)">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        <div class="git-info" style="display: flex; flex-direction: column;">
+                            <span class="git-title"
+                                style="color:var(--text-main); font-size: 0.7rem; line-height: 1.2;">GITHUB
+                                REPOSITORY</span>
+                            <span class="git-username"
+                                style="color:var(--text-muted); font-size: 0.9rem; line-height: 1.2;">@skype1121</span>
+                        </div>
+                        <div class="git-status"
+                            style="color:var(--text-main); font-size: 0.75rem; margin-left: 0.5rem; display: flex; align-items: center; gap: 4px;">
+                            <span class="pulse-dot"
+                                style="background:#0f0; box-shadow:0 0 5px #0f0; width: 6px; height: 6px;"></span>
+                            LIVE CODE
+                        </div>
+                    </a>
+                </div>
+
+                <div class="scroll-ind"></div>
+            </div>
+            
+            <!-- 3D Model Container -->
+            <div class="hero-model-wrapper">
+                <div id="model-container" style="position: relative; width: 100%; height: 100%; pointer-events: auto; cursor: grab;">
+                    <!-- Drag to Rotate Indicator -->
+                    <div style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.9); font-family: var(--font-mono); font-size: 13px; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 30px; pointer-events: none; animation: pulseBadge 2.5s infinite; display: flex; align-items: center; gap: 8px; z-index: 10; backdrop-filter: blur(10px);">
+                        <span style="font-size: 16px;">🤚</span> Drag to rotate
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MIDPOINT TRANSITION GATE -->
+        <div class="midpoint-gate">
+            <div class="gate-line"></div>
+            <div class="gate-text"><span class="pulse-dot"
+                    style="display:inline-block; margin-right:8px;"></span>ENVIRONMENT_SWITCH : REAL-WORLD</div>
+        </div>
+
+        <!-- MINI: WHY I BUILD ROBOTS & TIMELINE -->
+        <section id="why-build" class="content-section flow-stage section-light">
+            <div class="signal-node pulse-node"></div>
+            <div class="section-container card-hover border-neon">
+                <div class="stage-label">MOTIVATION</div>
+                <h2>Why I Build Robots</h2>
+                <div class="content-body why-body"
+                    style="display:flex; justify-content:space-between; align-items:stretch; gap:3rem; flex-wrap:wrap;">
+                    <div class="why-left" style="flex:1 1 500px; padding-right: 20px;">
+                        <div class="ko-hover ko-hover-right lang-text"
+                            data-ko="&quot;시뮬레이션은 <span class='white'>실패를 용서</span>하지만,<br>현실은 실패를 <span class='fail-red'>바로 결과로 만든다</span>.<br>그래서 나는 <strong><span class='glow-sys'>실물에서 살아남는 제어</span></strong>를 만든다.&quot;"
+                            data-en="&quot;Simulation <span class='white'>forgives failure</span>, but<br>reality makes failure an <span class='fail-red'>immediate result</span>.<br>So I build <strong><span class='glow-sys'>control that survives the real world</span></strong>.&quot;"
+                            style="line-height:2; font-size:1.1rem;">
+                            "시뮬레이션은 <span class="white">실패를 용서</span>하지만,<br>
+                            현실은 실패를 <span class="fail-red">바로 결과로 만든다</span>.<br>
+                            그래서 나는 <strong><span class="glow-sys">실물에서 살아남는 제어</span></strong>를 만든다."
+                        </div>
+                        <div class="mini-timeline mt-4">
+                            <div class="tl-node">
+                                <div class="tl-year">2024</div>
+                                <div class="tl-desc">First Motor<br>Control</div>
+                            </div>
+                            <div class="tl-arrow">&rarr;</div>
+                            <div class="tl-node">
+                                <div class="tl-year">2025</div>
+                                <div class="tl-desc">Multi Motor<br>(AK70)</div>
+                            </div>
+                            <div class="tl-arrow">&rarr;</div>
+                            <div class="tl-node glow-node">
+                                <div class="tl-year">2026</div>
+                                <div class="tl-desc">System-1<br>Architecture</div>
+                            </div>
+                        </div>
+                        <div class="intro-text mt-4"
+                            style="line-height: 1.8; font-size: 0.95rem; font-weight: 500; color: #222; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.5rem;">
+                            <span class="lang-text"
+                                data-ko="로봇 소프트웨어 개발을 목표로 휴머노이드와 로봇암 프로젝트를 직접 설계·구현하고 있습니다. ROS2 기반 제어 구조와 CAN 통신, 모터 드라이버를 구축하며 실제 하드웨어 중심의 안정적인 시스템 개발을 지향합니다. 문제를 단계적으로 분석하고 끝까지 해결하는 개발자 <span style='white-space: nowrap;'><strong>류승윤</strong>입니다.</span>"
+                                data-en="With the goal of robot software development, I directly design and implement humanoid and robot arm projects. Building upon ROS2-based control structures, CAN communication, and motor drivers, I aim for stable, hardware-centric system development. I am a developer who analyzes problems step-by-step and solves them to the very end, <span style='white-space: nowrap;'><strong>Seungyoon Ryu</strong>.</span>">로봇
+                                소프트웨어 개발을 목표로 휴머노이드와 로봇암 프로젝트를 직접 설계·구현하고 있습니다. ROS2 기반 제어 구조와 CAN 통신, 모터 드라이버를 구축하며 실제
+                                하드웨어 중심의 안정적인 시스템 개발을 지향합니다. 문제를 단계적으로 분석하고 끝까지 해결하는 개발자 <span
+                                    style="white-space: nowrap;"><strong>류승윤</strong>입니다.</span></span>
+                            <div
+                                style="font-family: var(--font-mono); margin-top: 1rem; font-size: 0.85rem; font-weight: bold; color: #000; display: inline-flex; align-items: center; background: rgba(0,0,0,0.05); padding: 6px 12px; border-radius: 4px; box-shadow: inset 0 0 5px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1);">
+                                <svg style="margin-right: 8px;" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                <span class="lang-text" data-ko="이메일 :" data-en="Email: ">이메일 :</span> <a
+                                    href="mailto:skype1121@dongyang.ac.kr"
+                                    style="color: #000; text-decoration: none; border-bottom: 1px solid #000; margin-left: 4px;">skype1121@dongyang.ac.kr</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="why-right" style="flex: 2 1 600px; position:relative; min-height: 400px; background: #050505; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); margin-bottom: 1rem;">
+                        <!-- 3D Grid & Model Container -->
+                        <div id="hand-model-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; cursor: grab;"></div>
+                        
+                        <!-- Silver Invitation Text -->
+                        <div class="lang-text" data-ko="Together." data-en="Together." style="position: absolute; top: 35px; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.3rem; letter-spacing: 8px; color: #f0f0f5; text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(170, 190, 255, 0.5), 0 0 40px rgba(170, 190, 255, 0.3); z-index: 10; pointer-events: none;">Together.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="signal-flow-line"></div>
+        </section>
+
+        <!-- SENSE: CONTROL PHILOSOPHY -->
+        <section id="philosophy" class="content-section flow-stage section-dark">
+            <div class="signal-node pulse-node"></div>
+            <div class="section-container card-hover">
+                <div class="stage-label">STEP 1. SENSE & PHILOSOPHY</div>
+                <h2>01. CONTROL PHILOSOPHY <span class="tag">System-1 vs System-2</span> <span class="badge-num">14µs
+                        LATENCY</span></h2>
+                <div class="content-body"
+                    style="display:flex; justify-content:space-between; align-items:stretch; gap:3rem;">
+                    <div class="why-left" style="flex:0 0 500px; padding-right:20px;">
+                        <p class="lang-text"
+                            data-ko="상위 인지(System-2)가 판단을 내리기 전에, 극단적 지연(Latency) 환경에서도 로봇이 넘어지지 않도록 하는 <strong>하위 반사 신경(System-1)</strong>의 절대적 안정화를 중시합니다.<br><br>단순 궤적 추종이 아닌, 외란에도 스스로 균형 상태를 찾아가는 <span class='glow-sys' style='color:var(--text-main); text-shadow:0 0 10px rgba(0,229,255,0.4);'>전신 동역학(Whole-Body Dynamics)</span>을 우선합니다."
+                            data-en="Before high-level cognitive systems (System-2) make a judgment, I prioritize the absolute stabilization of <strong>lower-level reflexes (System-1)</strong> to prevent the robot from falling under extreme latency environments.<br><br>Rather than simple trajectory tracking, I prioritize <span class='glow-sys' style='color:var(--text-main); text-shadow:0 0 10px rgba(0,229,255,0.4);'>Whole-Body Dynamics</span> that naturally converges to a balanced state against disturbances."
+                            style="line-height: 1.8;">
+                            상위 인지(System-2)가 판단을 내리기 전에, 극단적 지연(Latency) 환경에서도 로봇이 넘어지지 않도록 하는 <strong>하위 반사
+                                신경(System-1)</strong>의 절대적 안정화를 중시합니다.<br><br>
+                            단순 궤적 추종이 아닌, 외란에도 스스로 균형 상태를 찾아가는 <span class="glow-sys"
+                                style="color:var(--text-main); text-shadow:0 0 10px rgba(0,229,255,0.4);">전신
+                                동역학(Whole-Body Dynamics)</span>을 우선합니다.
+                        </p>
+                        <button class="eng-detail-btn lang-text" data-ko="엔지니어링 세부 정보 보기"
+                            data-en="Show Engineering Detail" onclick="toggleDetail('detail-philosophy')"
+                            style="margin-top:20px;">엔지니어링 세부 정보 보기</button>
+                        <div id="detail-philosophy" class="eng-detail-content terminal-ui">
+                            <div class="term-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                                    class="dot green"></span> <span class="term-title">latency_optimization.sh</span>
+                            </div>
+                            <div class="pt-container">
+                                <div class="pt-node fail lang-text"
+                                    data-ko="<strong>Failure:</strong> RL 정책 현실 투입 시 10ms 단위 CAN 지연 누적으로 발산 및 전복 발생"
+                                    data-en="<strong>Failure:</strong> Divergence and rollover occurred due to accumulation of 10ms-level CAN delays when deploying RL policies to reality.">
+                                    <strong>Failure:</strong> RL 정책 현실 투입 시 10ms 단위 CAN 지연 누적으로 발산
+                                    및 전복 발생
+                                </div>
+                                <div class="pt-arrow">&darr;</div>
+                                <div class="pt-node fix lang-text"
+                                    data-ko="<strong>Fix:</strong> 시스템 스케줄러 튜닝 & 커스텀 RTOS/ROS2 분산으로 14µs 확보"
+                                    data-en="<strong>Fix:</strong> Secured 14µs through system scheduler tuning & custom RTOS/ROS2 distribution.">
+                                    <strong>Fix:</strong> 시스템 스케줄러 튜닝 & 커스텀 RTOS/ROS2 분산으로 14µs 확보
+                                </div>
+                            </div>
+                            <pre><code class="language-yaml"># IMU Extended Kalman Filter node constraint snippet
+config:
+  publish_frequency: 200.0
+  latency_compensation_ms: 12.5</code></pre>
+                        </div>
+                    </div>
+                    <div class="why-right"
+                        style="flex: 1; border-left: 1px dashed rgba(0, 229, 255, 0.3); padding-left: 2rem; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="sys-comm-viz">
+                            <div class="sys-node sys2-node">
+                                <div class="sys-ring"></div>
+                                <div class="sys-text">SYSTEM-2<br><span>Cognitive</span></div>
+                            </div>
+                            <div class="comm-channel">
+                                <div class="comm-packet"></div>
+                                <div class="comm-packet delay1"></div>
+                                <div class="comm-packet delay2"></div>
+                                <div class="comm-label">Network / CAN</div>
+                            </div>
+                            <div class="sys-node sys1-node">
+                                <div class="sys-ring fast-spin"></div>
+                                <div class="sys-text">SYSTEM-1<br><span>Reflex Control</span></div>
+                                <div class="rt-badge">14µs RT-Loop</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pulse-flow-tracer"></div>
+            <div class="signal-flow-line"></div>
+        </section>
+
+        <!-- COMPUTE: HUMANOD MK1 & AI -->
+        <section id="humanod" class="content-section flow-stage section-dark">
+            <div class="signal-node pulse-node"></div>
+            <div class="section-container card-hover">
+                <div class="stage-label">STEP 2. COMPUTE & SIM2REAL</div>
+                <h2>02. MIDDLEWARE & RL <span class="tag">Orin Nano & Action Chunking</span> <span
+                        class="badge-num">1kHz LOOP</span></h2>
+                <div class="content-body"
+                    style="display:flex; justify-content:space-between; align-items:stretch; gap:1.5rem;">
+                    <div class="why-left" style="flex:0 0 420px; padding-right:10px;">
+                        <p class="lang-text"
+                            data-ko="센서 데이터를 수집하고 구동기에 도달하도록 만드는 초저지연 프레임워크.<br><strong>Hardware:</strong> Jetson Orin Nano, ROS2 Humble<br><strong>Sim-to-Real:</strong> Isaac Sim + Diffusion Policy + RTC"
+                            data-en="Ultra-low latency framework that collects sensor data and actuates control.<br><strong>Hardware:</strong> Jetson Orin Nano, ROS2 Humble<br><strong>Sim-to-Real:</strong> Isaac Sim + Diffusion Policy + RTC"
+                            style="line-height: 1.8;">
+                            센서 데이터를 수집하고 구동기에 도달하도록 만드는 초저지연 프레임워크.<br>
+                            <strong>Hardware:</strong> Jetson Orin Nano, ROS2 Humble<br>
+                            <strong>Sim-to-Real:</strong> Isaac Sim + Diffusion Policy + RTC
+                        </p>
+                        <button class="eng-detail-btn lang-text" data-ko="엔지니어링 세부 정보 보기"
+                            data-en="Show Engineering Detail" onclick="toggleDetail('detail-compute')"
+                            style="margin-top:20px;">엔지니어링 세부 정보 보기</button>
+                        <div id="detail-compute" class="eng-detail-content terminal-ui">
+                            <div class="term-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                                    class="dot green"></span> <span class="term-title">action_chunking.py</span></div>
+                            <div class="pt-container">
+                                <div class="pt-node fail lang-text"
+                                    data-ko="<strong>Failure:</strong> 시뮬레이션 정책을 젯슨 보드에 올렸을 때 추론 병목으로 제어 주기 하락"
+                                    data-en="<strong>Failure:</strong> Control frequency dropped due to inference bottleneck when deploying simulation policy to Jetson board.">
+                                    <strong>Failure:</strong> 시뮬레이션 정책을 젯슨 보드에 올렸을 때 추론 병목으로 제어
+                                    주기 하락
+                                </div>
+                                <div class="pt-arrow">&darr;</div>
+                                <div class="pt-node fix lang-text"
+                                    data-ko="<strong>Fix:</strong> Action Chunking 보간 적용으로 연산 중에도 1kHz 제어 방어"
+                                    data-en="<strong>Fix:</strong> Maintained 1kHz control even during computation by applying Action Chunking interpolation.">
+                                    <strong>Fix:</strong> Action Chunking 보간 적용으로 연산 중에도 1kHz 제어
+                                    방어
+                                </div>
+                            </div>
+                            <pre><code class="language-python"># Action Chunking snippet
+action_idx = (current_time - start) / dt
+motor_cmd = lerp(buf[idx], buf[idx+1], phase)
+apply_joint_torques(motor_cmd)</code></pre>
+                        </div>
+                    </div>
+                    <div class="why-right"
+                        style="flex: 1; border-left: 1px dashed rgba(0,229,255,0.3); padding-left: 1rem; display:flex; flex-direction:column; justify-content:center;">
+                        <div class="chart-viz" style="width:100%; margin:0; position:relative;">
+                            <p
+                                style="font-family:var(--font-mono); font-size:0.75rem; color:var(--bd-cyan); text-align:left; margin-bottom:10px;">
+                                > MOTOR POSITION TRACKING</p>
+                            <canvas id="rl-chart" width="1600" height="900" style="width:100%; height:auto;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pulse-flow-tracer"></div>
+            <div class="signal-flow-line"></div>
+        </section>
+
+        <!-- ACT: MECHANISM & 0.03 RAD => RESULT -->
+        <section id="actuate" class="content-section flow-stage section-dark">
+            <div class="signal-node pulse-node"></div>
+            <div class="section-container card-hover">
+                <div class="stage-label">STEP 3. MECHANISM DESIGN</div>
+                <h2>03. CYCLOIDAL KINEMATICS <span class="tag">Hypo/Epi Curve</span> <span class="badge-num">HW
+                        DESIGN</span></h2>
+                <div class="content-body"
+                    style="display:flex; flex-wrap: wrap; justify-content:space-between; align-items:stretch; gap:3rem;">
+                    <div class="why-left" style="flex:0 0 500px; padding-right:20px;">
+                        <p class="lang-text"
+                            data-ko="단순한 제어 코딩을 넘어, 감속기의 수학적 궤적(에피/하이포-사이클로이드)을 직접 분석하여 자체 구동계를 설계합니다.<br><br>비선형 기어 특성이 로봇 제어 응답성에 미치는 물리적 특성을 연구하고, 백래시(Backlash)를 최소화한 <strong>강건한 투명성(Transparency)</strong>을 확보합니다."
+                            data-en="Beyond simple control coding, I directly analyze the mathematical trajectory (epi/hypo-cycloid) of the reducer to design my own actuation system.<br><br>I research the physical characteristics of non-linear gear properties affecting robot control responsiveness, and secure <strong>robust transparency</strong> with minimized backlash."
+                            style="line-height: 1.8;">
+                            단순한 제어 코딩을 넘어, 감속기의 수학적 궤적(에피/하이포-사이클로이드)을 직접 분석하여 자체 구동계를 설계합니다.<br><br>
+                            비선형 기어 특성이 로봇 제어 응답성에 미치는 물리적 특성을 연구하고, 백래시(Backlash)를 최소화한 <strong>강건한
+                                투명성(Transparency)</strong>을 확보합니다.
+                        </p>
+                        <button class="eng-detail-btn lang-text mt-4" data-ko="엔지니어링 세부 정보 보기"
+                            data-en="Show Engineering Detail" onclick="toggleDetail('detail-actuate')">엔지니어링 세부 정보
+                            보기</button>
+                        <div id="detail-actuate" class="eng-detail-content terminal-ui">
+                            <div class="term-header"><span class="dot red"></span><span class="dot yellow"></span><span
+                                    class="dot green"></span> <span class="term-title">cycloid_generator.py</span></div>
+                            <div class="pt-container">
+                                <div class="pt-node fail lang-text"
+                                    data-ko="<strong>Problem:</strong> 기성 감속기의 스펙 한계 및 관절 커스텀 형상 제약"
+                                    data-en="<strong>Problem:</strong> Specification limits of off-the-shelf reducers and constraints on custom joint shapes.">
+                                    <strong>Problem:</strong> 기성 감속기의 스펙 한계 및 관절 커스텀 형상 제약
+                                </div>
+                                <div class="pt-arrow">&darr;</div>
+                                <div class="pt-node fix lang-text" data-ko="<strong>Fix:</strong> 하이포/에피 기구학 도출 후 자체 설계"
+                                    data-en="<strong>Fix:</strong> Independent design after deriving hypo/epi kinematics.">
+                                    <strong>Fix:</strong> 하이포/에피 기구학 도출 후 자체 설계
+                                </div>
+                            </div>
+                            <pre><code class="language-python"># Parametric Equation
+theta = np.linspace(0, 2 * np.pi, 1000)
+x = (R + r)*np.cos(theta) - d*np.cos((R + r)/r * theta)
+y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
+                        </div>
+                    </div>
+                    <div class="why-right"
+                        style="flex:1; border-left: 1px dashed rgba(0, 229, 255, 0.3); padding-left: 2rem; display:flex; flex-direction:column; justify-content:center;">
+                        <p
+                            style="font-family:var(--font-mono); font-size:0.75rem; color:var(--bd-cyan); margin-bottom:10px;">
+                            [ GEAR RATIO & KINEMATICS SIMULATION ]</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: stretch; width: 100%;">
+                            <div class="cycloid-viz"
+                                style="flex: 1 1 300px; margin:0; position:relative; display: flex; align-items: center; justify-content: center;">
+                                <canvas id="cycloid-canvas" width="700" height="700"
+                                    style="width:100%; max-width: 100%; height:auto;"></canvas>
+                            </div>
+                            <div
+                                style="flex: 1 1 300px; position: relative; display: flex; align-items: center; justify-content: center;">
+                                <img src="11.PNG" alt="Cycloidal CAD"
+                                    style="width: 100%; height: auto; max-height: 400px; object-fit: contain; border-radius: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pulse-flow-tracer"></div>
+            <div class="signal-flow-line"></div>
+        </section>
+
+        <!-- OUTPUT: VISION -->
+        <section id="vision" class="content-section flow-stage section-dark terminal-stage">
+            <div class="signal-node pulse-node"></div>
+            <div class="section-container card-hover">
+                <div class="stage-label">FINAL OUTPUT</div>
+                <h2>04. ACADEMIC & VISION <span class="tag">System-2 Integration</span></h2>
+                <div class="content-body"
+                    style="display:flex; justify-content:space-between; align-items:stretch; gap:3rem;">
+                    <div class="why-left" style="flex:0 0 500px; padding-right:20px;">
+                        <p class="lang-text"
+                            data-ko="단단한 반사신경(System-1) 기반 위에, BitVLA 및 World Foundation Model의 <strong>'물리적 시각 인지'</strong> 능력을 결합하여, 실패가 없는 Embodied AI 로봇을 구축합니다.<br><br>자율 행동(Autonomous Behavior)과 멀티 모달 인지 능력이 통합된 휴머노이드 제어를 준비합니다."
+                            data-en="On top of the solid reflex (System-1) foundation, by combining the <strong>'physical visual perception'</strong> capabilities of BitVLA and World Foundation Model, I build a failure-free Embodied AI robot.<br><br>I am preparing humanoid control that integrates Autonomous Behavior and multi-modal cognitive capability."
+                            style="line-height: 1.8;">
+                            단단한 반사신경(System-1) 기반 위에, BitVLA 및 World Foundation Model의 <strong>'물리적 시각 인지'</strong> 능력을
+                            결합하여, 실패가 없는 Embodied AI 로봇을 구축합니다.<br><br>
+                            자율 행동(Autonomous Behavior)과 멀티 모달 인지 능력이 통합된 휴머노이드 제어를 준비합니다.
+                        </p>
+                        <div class="contact-box mt-4">
+                            <a href="https://github.com/skype1121" class="github-card" target="_blank"
+                                style="background:var(--panel-bg); border:1px solid var(--border-color);">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--bd-cyan)">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                                <div class="git-info">
+                                    <span class="git-title" style="color:var(--text-main);">GITHUB REPOSITORY</span>
+                                    <span class="git-username" style="color:var(--text-muted);">@skype1121</span>
+                                </div>
+                                <div class="git-status" style="color:var(--text-main);">
+                                    <span class="pulse-dot" style="background:#0f0; box-shadow:0 0 5px #0f0;"></span>
+                                    LIVE CODE
+                                </div>
+                            </a>
+                            <p class="mt-4">> <strong class="glitch-text ko-hover" data-ko="보스턴 다이내믹스 아틀라스 팀 준비 완료"
+                                    data-text="READY FOR BOSTON DYNAMICS ATLAS TEAM">READY FOR BOSTON DYNAMICS ATLAS
+                                    TEAM</strong></p>
+                        </div>
+                    </div>
+                    <div class="why-right"
+                        style="flex:1; border-left: 1px dashed rgba(0,229,255,0.3); padding-left: 2rem; display:flex; align-items:center; justify-content:center;">
+                        <div class="vision-box"
+                            style="width:100%; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); box-shadow: 4px 4px 0 rgba(0,229,255,0.1);">
+                            <h3
+                                style="font-family:var(--font-mono); margin-bottom:1.5rem; font-size:1.1rem; color:var(--bd-cyan); border-bottom:1px solid rgba(0,229,255,0.3); padding-bottom:10px;">
+                                FUTURE SCOPE ARCHIVE_</h3>
+                            <ul
+                                style="list-style:none; padding:0; margin:0; text-align:left; color:var(--text-main); font-size:0.9rem; font-family:var(--font-mono); font-weight:bold; display:flex; flex-direction:column; gap:12px;">
+                                <li style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span>> VISUO-MOTOR POLICY</span> <span class="highlight"
+                                        style="background:var(--bd-cyan); color:#000; padding:2px 8px; border-radius:2px; font-size:0.75rem;">RESEARCHING</span>
+                                </li>
+                                <li style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span>> DEXTEROUS MANIPULATION</span> <span class="highlight"
+                                        style="background:rgba(255,255,255,0.1); color:#fff; padding:2px 8px; border-radius:2px; font-size:0.75rem;">PENDING</span>
+                                </li>
+                                <li style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span>> SIM-TO-REAL SCALE-UP</span> <span class="highlight"
+                                        style="background:rgba(255,255,255,0.1); color:#fff; padding:2px 8px; border-radius:2px; font-size:0.75rem;">PENDING</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="script.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        const container = document.getElementById('model-container');
+        if (container) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+            camera.position.set(0, 1.5, 5); 
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.0;
+            container.appendChild(renderer.domElement);
+
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.target.set(0, 0, 0);
+            controls.enableZoom = false;
+            controls.enablePan = false;
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+            directionalLight.position.set(5, 5, 2);
+            scene.add(directionalLight);
+
+            let mixer;
+            const loader = new GLTFLoader();
+            loader.load('robot_playground.glb', function(gltf) {
+                const model = gltf.scene;
+                // 배율 10% 낮춤 (1.2 -> 1.08)
+                model.scale.set(1.08, 1.08, 1.08);
+                
+                // 모델 중앙 정렬 및 Y축 하단 마킹 위치로 내림
+                const box = new THREE.Box3().setFromObject(model);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                
+                model.position.x = -center.x;
+                model.position.y = -center.y - size.y / 2 + 0.8; 
+                model.position.z = -center.z;
+
+                scene.add(model);
+
+                // 애니메이션 중간부터 실행
+                if (gltf.animations && gltf.animations.length > 0) {
+                    mixer = new THREE.AnimationMixer(model);
+                    const action = mixer.clipAction(gltf.animations[0]);
+                    action.play();
+                    
+                    // 중간 시간 설정
+                    const midTime = action.getClip().duration / 2;
+                    mixer.setTime(midTime);
+                }
+            }, undefined, function(error) {
+                console.error(error);
+            });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+
+            // --- SECOND SCENE: Robotic Hand ---
+            const handContainer = document.getElementById('hand-model-container');
+            let hControls, hRenderer, hScene, hCamera;
+            if (handContainer) {
+                hScene = new THREE.Scene();
+                // Add Massive Grid
+                const hGrid = new THREE.GridHelper(200, 150, 0x00e5ff, 0x111111);
+                hGrid.position.y = 0;
+                hScene.add(hGrid);
+
+                hCamera = new THREE.PerspectiveCamera(45, handContainer.clientWidth / handContainer.clientHeight, 0.1, 500);
+                hCamera.position.set(0, 3, 5); // Fallback start position
+
+                hRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                hRenderer.setSize(handContainer.clientWidth, handContainer.clientHeight);
+                hRenderer.setPixelRatio(window.devicePixelRatio);
+                hRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+                hRenderer.toneMappingExposure = 1.0;
+                handContainer.appendChild(hRenderer.domElement);
+
+                // No OrbitControls, Custom Drag to Rotate Model only
+                // This keeps the massive grid static in the background!
+                hRenderer.domElement.style.cursor = 'grab';
+
+                // Add proper lights so model is never black/inverted
+                const hAmbientLight = new THREE.AmbientLight(0xffffff, 2.5);
+                hScene.add(hAmbientLight);
+                const hDirLight = new THREE.DirectionalLight(0xffffff, 3.5);
+                hDirLight.position.set(5, 10, 7);
+                hScene.add(hDirLight);
+                const hBackLight = new THREE.DirectionalLight(0xffffff, 2);
+                hBackLight.position.set(-5, -5, -5);
+                hScene.add(hBackLight);
+
+                let hModelWrapperY = new THREE.Group();
+                let hModelWrapperX = new THREE.Group();
+                hModelWrapperY.add(hModelWrapperX);
+                hScene.add(hModelWrapperY);
+
+                loader.load('robotic_hand.glb', function(gltf) {
+                    const hModel = gltf.scene;
+                    const hBox = new THREE.Box3().setFromObject(hModel);
+                    const hCenter = hBox.getCenter(new THREE.Vector3());
+                    const hSize = hBox.getSize(new THREE.Vector3());
+                    
+                    // Center the model natively inside an inner wrapper
+                    hModel.position.set(-hCenter.x, -hCenter.y, -hCenter.z);
+                    
+                    const hInnerWrapper = new THREE.Group();
+                    hInnerWrapper.add(hModel);
+
+                    // Fix orientation and scale on the inner wrapper so centering is preserved
+                    hInnerWrapper.rotation.set(-Math.PI / 2, 0, Math.PI / 6);
+                    hInnerWrapper.scale.set(3.5, 3.5, 3.5);
+
+                    hModelWrapperX.add(hInnerWrapper);
+                    // Lift above the grid
+                    const yOffset = (hSize.y > hSize.z ? hSize.y : hSize.z) * 3.5 * 0.5 + 0.5;
+                    hModelWrapperY.position.y = yOffset;
+
+                    // Static camera placement
+                    const maxDim = Math.max(hSize.x, hSize.y, hSize.z) * 3.5;
+                    hCamera.position.set(0, maxDim * 0.8, maxDim * 1.5);
+                    hCamera.lookAt(0, yOffset, 0); // Look exactly at the hand center
+                });
+
+                // Custom Smooth Camera Rotation Logic
+                let isHDragging = false;
+                let hPrevMouse = { x: 0, y: 0 };
+                window.targetHandRotX = 0;
+                window.targetHandRotY = 0;
+                window.currentHandRotX = 0;
+                window.currentHandRotY = 0;
+                
+                const handDom = document.getElementById('hand-model-container');
+                
+                handDom.addEventListener('pointerdown', (e) => {
+                    isHDragging = true;
+                    hPrevMouse = { x: e.clientX, y: e.clientY };
+                    handDom.style.cursor = 'grabbing';
+                });
+                
+                window.targetHandZoom = 1.0;
+                window.currentHandZoom = 1.0;
+                
+                handDom.addEventListener('wheel', (e) => {
+                    e.preventDefault(); // Prevent page scroll
+                    // Scroll down (positive deltaY) = zoom out = lower zoom value
+                    window.targetHandZoom -= e.deltaY * 0.0015;
+                    // Clamp zoom limits
+                    window.targetHandZoom = Math.max(0.5, Math.min(4.0, window.targetHandZoom));
+                }, { passive: false });
+                
+                window.addEventListener('pointermove', (e) => {
+                    if (isHDragging) {
+                        const deltaX = e.clientX - hPrevMouse.x;
+                        const deltaY = e.clientY - hPrevMouse.y;
+                        
+                        window.targetHandRotY += deltaX * 0.01;
+                        window.targetHandRotX += deltaY * 0.01;
+                        
+                        hPrevMouse = { x: e.clientX, y: e.clientY };
+                    }
+                });
+                
+                window.addEventListener('pointerup', () => {
+                    isHDragging = false;
+                    handDom.style.cursor = 'grab';
+                });
+
+                // Handle resize for handContainer
+                window.addEventListener('resize', () => {
+                    if(handContainer.clientWidth > 0) {
+                        hCamera.aspect = handContainer.clientWidth / handContainer.clientHeight;
+                        hCamera.updateProjectionMatrix();
+                        hRenderer.setSize(handContainer.clientWidth, handContainer.clientHeight);
+                    }
+                });
+                
+                window.hModelWrapperGlobalY = hModelWrapperY;
+                window.hModelWrapperGlobalX = hModelWrapperX;
+            }
+
+            const clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                if (mixer) {
+                    mixer.update(clock.getDelta());
+                }
+                controls.update();
+                renderer.render(scene, camera);
+                
+                // Render SECOND scene (Robotic Hand)
+                if (hRenderer && hScene && hCamera) {
+                    if (window.hModelWrapperGlobalY && window.hModelWrapperGlobalX) {
+                        // Apply buttery smooth lerping (damping) to rotation and zoom
+                        window.currentHandRotX += (window.targetHandRotX - window.currentHandRotX) * 0.1;
+                        window.currentHandRotY += (window.targetHandRotY - window.currentHandRotY) * 0.1;
+                        window.currentHandZoom += (window.targetHandZoom - window.currentHandZoom) * 0.1;
+                        
+                        window.hModelWrapperGlobalX.rotation.x = window.currentHandRotX;
+                        window.hModelWrapperGlobalY.rotation.y = window.currentHandRotY;
+                        
+                        // Apply zoom to camera
+                        hCamera.zoom = window.currentHandZoom;
+                        hCamera.updateProjectionMatrix();
+                    }
+                    hRenderer.render(hScene, hCamera);
+                }
+            }
+            animate();
+        }
+    </script>
+</body>
+
+</html>
