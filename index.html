@@ -19,15 +19,19 @@
 
     <nav>
         <!-- Logo Area -->
-        <div class="nav-logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
+        <div class="nav-logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;"
+            onclick="window.location.href='index.html'">
             <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" stroke="#8b5cf6" stroke-width="6" stroke-linejoin="round" fill="rgba(139, 92, 246, 0.1)"/>
-                <path d="M50 5 L50 50 L90 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
-                <path d="M50 50 L10 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
-                <path d="M10 27 L50 50 L90 27" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" stroke-dasharray="4 4"/>
-                <circle cx="50" cy="50" r="4" fill="#00e5ff"/>
+                <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" stroke="#8b5cf6" stroke-width="6"
+                    stroke-linejoin="round" fill="rgba(139, 92, 246, 0.1)" />
+                <path d="M50 5 L50 50 L90 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" />
+                <path d="M50 50 L10 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" />
+                <path d="M10 27 L50 50 L90 27" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"
+                    stroke-dasharray="4 4" />
+                <circle cx="50" cy="50" r="4" fill="#00e5ff" />
             </svg>
-            <span style="color: #fff; font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; letter-spacing: 1px;">RSY</span>
+            <span
+                style="color: #fff; font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; letter-spacing: 1px;">RSY</span>
         </div>
 
         <div style="display: flex; align-items: stretch; gap: 0.5rem; height: 100%;">
@@ -66,26 +70,33 @@
                         <div class="human-slogan lang-text" data-ko="&quot;나는 먼저 생각하지 않고, 먼저 반응하는 로봇을 만듭니다.&quot;"
                             data-en="&quot;I build robots that react first, not think first.&quot;">"나는 먼저 생각하지 않고, 먼저
                             반응하는 로봇을 만듭니다."</div>
-                        <div class="human-stats"
-                            style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 15px;">
-                            <div class="human-stat"><strong><span class="lang-text" data-ko="위치:"
-                                        data-en="Location:">위치:</span></strong> <span class="lang-text"
-                                    data-ko="대한민국 서울" data-en="Seoul, South Korea">대한민국 서울</span></div>
-                            <div class="human-stat"><strong><span class="lang-text" data-ko="연락처:"
-                                        data-en="Contact:">연락처:</span></strong> <span id="email-copy"
-                                    style="color:#0f0; font-size: calc(100% + 2px); font-weight: bold; cursor: pointer; text-decoration: underline; padding: 2px 6px; border-radius: 4px; transition: all 0.2s;"
-                                    onmouseover="this.style.background='rgba(0,255,0,0.1)'; this.style.boxShadow='0 0 8px rgba(0,255,0,0.5)';"
-                                    onmouseout="this.style.background='none'; this.style.boxShadow='none';">skype1121@dongyang.ac.kr</span>
+                        <div class="human-stats-container"
+                            style="display: flex; flex-wrap: wrap; gap: 3rem; margin-top: 15px;">
+                            <div class="human-stats-left" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div class="human-stat"><strong><span class="lang-text" data-ko="위치:"
+                                            data-en="Location:">위치:</span></strong> <span class="lang-text"
+                                        data-ko="대한민국 서울" data-en="Seoul, South Korea">대한민국 서울</span></div>
+                                <div class="human-stat"><strong><span class="lang-text" data-ko="연락처:"
+                                            data-en="Contact:">연락처:</span></strong> <span id="email-copy"
+                                        style="color:#0f0; font-size: calc(100% + 2px); font-weight: bold; cursor: pointer; text-decoration: underline; padding: 2px 6px; border-radius: 4px; transition: all 0.2s;"
+                                        onmouseover="this.style.background='rgba(0,255,0,0.1)'; this.style.boxShadow='0 0 8px rgba(0,255,0,0.5)';"
+                                        onmouseout="this.style.background='none'; this.style.boxShadow='none';">skype1121@dongyang.ac.kr</span>
+                                </div>
                             </div>
-                            <div class="human-stat"><strong><span class="lang-text" data-ko="전문 :"
-                                        data-en="Specialty :">전문 :</span></strong> <span class="lang-text"
-                                    data-ko="로봇 제어 / 설계"
-                                    data-en="Robot Control / Design">로봇 제어 / 설계</span></div>
-                            <div class="human-stat"><strong><span class="lang-text" data-ko="핵심 :"
-                                        data-en="Core :">핵심 :</span></strong> <span class="lang-text"
-                                    data-ko="휴머노이드 하체 제어 / 실시간 제어 및 안정화 2026" data-en="Humanoid Lower-body Control / Real-time Stabilization 2026">휴머노이드 하체 제어 / 실시간 제어 및 안정화 2026</span></div>
-                            <div class="human-stat"><strong><span class="lang-text"
-                                        data-ko="스택:" data-en="Stack:">스택:</span></strong> ROS2 / CAN / Jetson</div>
+                            <div class="human-stats-right" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div class="human-stat"><strong><span class="lang-text" data-ko="전문 :"
+                                            data-en="Specialty :">전문 :</span></strong> <span class="lang-text"
+                                        data-ko="로봇 제어 / 설계" data-en="Robot Control / Design">로봇 제어 / 설계</span></div>
+                                <div class="human-stat"><strong><span class="lang-text" data-ko="핵심 :"
+                                            data-en="Core :">핵심
+                                            :</span></strong> <span class="lang-text"
+                                        data-ko="휴머노이드 하체 제어 / 실시간 제어 및 안정화 2026"
+                                        data-en="Humanoid Lower-body Control / Real-time Stabilization 2026">휴머노이드 하체 제어
+                                        /
+                                        실시간 제어 및 안정화 2026</span></div>
+                                <div class="human-stat"><strong><span class="lang-text" data-ko="스택:"
+                                            data-en="Stack:">스택:</span></strong> ROS2 / CAN / Jetson</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -120,12 +131,14 @@
 
                 <div class="scroll-ind"></div>
             </div>
-            
+
             <!-- 3D Model Container -->
             <div class="hero-model-wrapper">
-                <div id="model-container" style="position: relative; width: 100%; height: 100%; pointer-events: auto; cursor: grab;">
+                <div id="model-container"
+                    style="position: relative; width: 100%; height: 100%; pointer-events: auto; cursor: grab;">
                     <!-- Drag to Rotate Indicator -->
-                    <div style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.9); font-family: var(--font-mono); font-size: 13px; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 30px; pointer-events: none; animation: pulseBadge 2.5s infinite; display: flex; align-items: center; gap: 8px; z-index: 10; backdrop-filter: blur(10px);">
+                    <div
+                        style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.9); font-family: var(--font-mono); font-size: 13px; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 30px; pointer-events: none; animation: pulseBadge 2.5s infinite; display: flex; align-items: center; gap: 8px; z-index: 10; backdrop-filter: blur(10px);">
                         <span style="font-size: 16px;">🤚</span> Drag to rotate
                     </div>
                 </div>
@@ -196,12 +209,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="why-right" style="flex: 2 1 600px; position:relative; min-height: 400px; background: #050505; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); margin-bottom: 1rem;">
+                    <div class="why-right"
+                        style="flex: 2 1 600px; position:relative; min-height: 400px; background: #050505; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,0.8); margin-bottom: 1rem;">
                         <!-- 3D Grid & Model Container -->
-                        <div id="hand-model-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; cursor: grab;"></div>
-                        
+                        <div id="hand-model-container"
+                            style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; cursor: grab;"></div>
+
                         <!-- Silver Invitation Text -->
-                        <div class="lang-text" data-ko="Together." data-en="Together." style="position: absolute; top: 35px; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.3rem; letter-spacing: 8px; color: #f0f0f5; text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(170, 190, 255, 0.5), 0 0 40px rgba(170, 190, 255, 0.3); z-index: 10; pointer-events: none;">Together.</div>
+                        <div class="lang-text" data-ko="Together." data-en="Together."
+                            style="position: absolute; top: 35px; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.3rem; letter-spacing: 8px; color: #f0f0f5; text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(170, 190, 255, 0.5), 0 0 40px rgba(170, 190, 255, 0.3); z-index: 10; pointer-events: none;">
+                            Together.</div>
+
+                        <!-- Subtle Drag Indicator -->
+                        <div
+                            style="position: absolute; bottom: 25px; left: 0; width: 100%; display: flex; justify-content: center; pointer-events: none; z-index: 10;">
+                            <span style="font-size: 1.6rem; opacity: 1;">🤚</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -494,7 +517,7 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
         if (container) {
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-            camera.position.set(0, 1.5, 5); 
+            camera.position.set(0, 1.5, 5);
 
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             renderer.setSize(container.clientWidth, container.clientHeight);
@@ -517,18 +540,18 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
 
             let mixer;
             const loader = new GLTFLoader();
-            loader.load('robot_playground.glb', function(gltf) {
+            loader.load('robot_playground.glb', function (gltf) {
                 const model = gltf.scene;
                 // 배율 10% 낮춤 (1.2 -> 1.08)
                 model.scale.set(1.08, 1.08, 1.08);
-                
+
                 // 모델 중앙 정렬 및 Y축 하단 마킹 위치로 내림
                 const box = new THREE.Box3().setFromObject(model);
                 const center = box.getCenter(new THREE.Vector3());
                 const size = box.getSize(new THREE.Vector3());
-                
+
                 model.position.x = -center.x;
-                model.position.y = -center.y - size.y / 2 + 0.8; 
+                model.position.y = -center.y - size.y / 2 + 0.8;
                 model.position.z = -center.z;
 
                 scene.add(model);
@@ -538,12 +561,12 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
                     mixer = new THREE.AnimationMixer(model);
                     const action = mixer.clipAction(gltf.animations[0]);
                     action.play();
-                    
+
                     // 중간 시간 설정
                     const midTime = action.getClip().duration / 2;
                     mixer.setTime(midTime);
                 }
-            }, undefined, function(error) {
+            }, undefined, function (error) {
                 console.error(error);
             });
 
@@ -592,15 +615,15 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
                 hModelWrapperY.add(hModelWrapperX);
                 hScene.add(hModelWrapperY);
 
-                loader.load('robotic_hand.glb', function(gltf) {
+                loader.load('robotic_hand.glb', function (gltf) {
                     const hModel = gltf.scene;
                     const hBox = new THREE.Box3().setFromObject(hModel);
                     const hCenter = hBox.getCenter(new THREE.Vector3());
                     const hSize = hBox.getSize(new THREE.Vector3());
-                    
+
                     // Center the model natively inside an inner wrapper
                     hModel.position.set(-hCenter.x, -hCenter.y, -hCenter.z);
-                    
+
                     const hInnerWrapper = new THREE.Group();
                     hInnerWrapper.add(hModel);
 
@@ -626,18 +649,18 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
                 window.targetHandRotY = 0;
                 window.currentHandRotX = 0;
                 window.currentHandRotY = 0;
-                
+
                 const handDom = document.getElementById('hand-model-container');
-                
+
                 handDom.addEventListener('pointerdown', (e) => {
                     isHDragging = true;
                     hPrevMouse = { x: e.clientX, y: e.clientY };
                     handDom.style.cursor = 'grabbing';
                 });
-                
+
                 window.targetHandZoom = 1.0;
                 window.currentHandZoom = 1.0;
-                
+
                 handDom.addEventListener('wheel', (e) => {
                     e.preventDefault(); // Prevent page scroll
                     // Scroll down (positive deltaY) = zoom out = lower zoom value
@@ -645,19 +668,19 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
                     // Clamp zoom limits
                     window.targetHandZoom = Math.max(0.5, Math.min(4.0, window.targetHandZoom));
                 }, { passive: false });
-                
+
                 window.addEventListener('pointermove', (e) => {
                     if (isHDragging) {
                         const deltaX = e.clientX - hPrevMouse.x;
                         const deltaY = e.clientY - hPrevMouse.y;
-                        
+
                         window.targetHandRotY += deltaX * 0.01;
                         window.targetHandRotX += deltaY * 0.01;
-                        
+
                         hPrevMouse = { x: e.clientX, y: e.clientY };
                     }
                 });
-                
+
                 window.addEventListener('pointerup', () => {
                     isHDragging = false;
                     handDom.style.cursor = 'grab';
@@ -665,13 +688,13 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
 
                 // Handle resize for handContainer
                 window.addEventListener('resize', () => {
-                    if(handContainer.clientWidth > 0) {
+                    if (handContainer.clientWidth > 0) {
                         hCamera.aspect = handContainer.clientWidth / handContainer.clientHeight;
                         hCamera.updateProjectionMatrix();
                         hRenderer.setSize(handContainer.clientWidth, handContainer.clientHeight);
                     }
                 });
-                
+
                 window.hModelWrapperGlobalY = hModelWrapperY;
                 window.hModelWrapperGlobalX = hModelWrapperX;
             }
@@ -684,7 +707,7 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
                 }
                 controls.update();
                 renderer.render(scene, camera);
-                
+
                 // Render SECOND scene (Robotic Hand)
                 if (hRenderer && hScene && hCamera) {
                     if (window.hModelWrapperGlobalY && window.hModelWrapperGlobalX) {
@@ -692,10 +715,10 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
                         window.currentHandRotX += (window.targetHandRotX - window.currentHandRotX) * 0.1;
                         window.currentHandRotY += (window.targetHandRotY - window.currentHandRotY) * 0.1;
                         window.currentHandZoom += (window.targetHandZoom - window.currentHandZoom) * 0.1;
-                        
+
                         window.hModelWrapperGlobalX.rotation.x = window.currentHandRotX;
                         window.hModelWrapperGlobalY.rotation.y = window.currentHandRotY;
-                        
+
                         // Apply zoom to camera
                         hCamera.zoom = window.currentHandZoom;
                         hCamera.updateProjectionMatrix();
