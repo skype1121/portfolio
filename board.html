@@ -354,7 +354,7 @@
             const list = document.getElementById('postsList');
             list.innerHTML = '';
 
-            const isEn = document.querySelector('.lang-btn.active') ? document.querySelector('.lang-btn.active').innerText === 'EN' : false;
+            const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
 
             if (posts.length === 0) {
                 list.innerHTML = `<div style="text-align: center; color: rgba(255,255,255,0.3); font-family: var(--font-mono); padding: 5rem 0; font-size: 1.1rem;">${isEn ? 'No posts yet. Start the conversation!' : '게시물이 텅 비어있습니다. 첫 글을 남겨주세요!'}</div>`;
@@ -412,7 +412,7 @@
             const existing = document.getElementById('active-reply-form');
             if (existing) existing.remove();
 
-            const isEn = document.querySelector('.lang-btn.active') ? document.querySelector('.lang-btn.active').innerText === 'EN' : false;
+            const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
             const postEl = document.getElementById('post-' + postId);
 
             const formHtml = `
@@ -432,7 +432,7 @@
         function submitReply(postId) {
             const author = document.getElementById('replyAuthor').value.trim();
             const content = document.getElementById('replyContent').value.trim();
-            const isEn = document.querySelector('.lang-btn.active') ? document.querySelector('.lang-btn.active').innerText === 'EN' : false;
+            const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
 
             if (!author || !content) {
                 alert(isEn ? 'Please fill out all fields.' : '답변 정보를 모두 입력해주세요.');
@@ -453,7 +453,7 @@
             const authorEl = document.getElementById('postAuthor');
             const contentEl = document.getElementById('postContent');
             const idEl = document.getElementById('editPostId');
-            const isEn = document.querySelector('.lang-btn.active') ? document.querySelector('.lang-btn.active').innerText === 'EN' : false;
+            const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
 
             const author = authorEl.value.trim();
             const content = contentEl.value.trim();
@@ -505,7 +505,7 @@
         }
 
         function deletePost(id) {
-            const isEn = document.querySelector('.lang-btn.active') ? document.querySelector('.lang-btn.active').innerText === 'EN' : false;
+            const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
             const msg = isEn ? 'Are you sure you want to delete this post permanently?' : '해당 글과 모든 답변을 삭제하시겠습니까? (되돌릴 수 없습니다)';
             if (confirm(msg)) {
                 let posts = getPosts();

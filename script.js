@@ -468,8 +468,11 @@ window.toggleDetail = function(id) {
     if (el.getAttribute('data-animating') === 'true') return;
     el.setAttribute('data-animating', 'true');
     
+    const parentContainer = el.closest('.content-body');
+
     if (el.classList.contains('show')) {
         // Closing
+        if (parentContainer) parentContainer.classList.remove('expanded');
         const height = el.offsetHeight;
         el.classList.remove('show'); // Resets immediately to final CSS state (height 0)
         
@@ -481,6 +484,7 @@ window.toggleDetail = function(id) {
         };
     } else {
         // Opening
+        if (parentContainer) parentContainer.classList.add('expanded');
         el.classList.add('show'); // Set to final state to measure
         const targetHeight = el.scrollHeight;
         
