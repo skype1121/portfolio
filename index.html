@@ -62,6 +62,7 @@
                 프로젝트</a>
             <a href="board.html" class="nav-archive-btn lang-text" data-ko="Q&A 게시판" data-en="Q&A Board">Q&A 게시판</a>
             <a href="contact.html" class="nav-archive-btn lang-text" data-ko="CONTACT" data-en="CONTACT">CONTACT</a>
+            <a href="#" id="nav-assist-btn" class="nav-archive-btn lang-text" data-ko="ASSIST" data-en="ASSIST" style="color: #00e5ff; font-weight: bold; text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);">ASSIST</a>
             <div class="lang-pill" style="margin-left: 0.5rem;">
                 <div class="pill-bg"></div>
                 <button class="pill-btn active" onclick="setLang('ko')">KO</button>
@@ -149,13 +150,13 @@
             </div>
 
             <!-- 3D Model Container -->
-            <div class="hero-model-wrapper">
+            <div class="hero-model-wrapper" id="hero-model-wrap">
                 <div id="model-container"
                     style="position: relative; width: 100%; height: 100%; pointer-events: auto; cursor: grab;">
-                    <!-- Drag to Rotate Indicator -->
-                    <div
+                    <!-- Drag to Action Indicator -->
+                    <div id="drag-action-indicator"
                         style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.9); font-family: var(--font-mono); font-size: 13px; font-weight: bold; padding: 10px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 30px; pointer-events: none; animation: pulseBadge 2.5s infinite; display: flex; align-items: center; gap: 8px; z-index: 10; backdrop-filter: blur(10px);">
-                        <span style="font-size: 16px;">🤚</span> Drag to rotate
+                        <span style="font-size: 16px;">🤚</span> <span id="drag-action-text">왼쪽으로 당겨보세요!</span>
                     </div>
                 </div>
             </div>
@@ -512,6 +513,29 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
             </div>
         </section>
 
+
+        <!-- AI Chat Interface (Hidden by default) -->
+        <div id="ai-chat-interface" class="ai-chat-container">
+            <button id="ai-close-btn" class="ai-close">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                돌아가기
+            </button>
+            <div class="ai-chat-window">
+                <div class="ai-chat-header">
+                    <div class="ai-avatar">AI</div>
+                    <div class="ai-title">System-1 Assistant</div>
+                </div>
+                <div class="ai-chat-messages" id="ai-messages">
+                    <div class="ai-msg ai-received">
+                        사이트의 무엇이 궁금하신가요? 엔지니어 류승윤의 기술 스택, 철학, 또는 모델에 대해 질문해 주세요.
+                    </div>
+                </div>
+                <div class="ai-chat-input-area">
+                    <input type="text" id="ai-input-field" placeholder="질문을 입력하세요..." class="ai-input">
+                    <button class="ai-send-btn" id="ai-send-btn">전송</button>
+                </div>
+            </div>
+        </div>
 
     </main>
 

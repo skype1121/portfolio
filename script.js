@@ -1221,3 +1221,372 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+// ==========================================
+// System-1 AI Assistant Memory & Logic Engine
+// ==========================================
+const sys1KnowledgeBase = [
+    {
+        keywords: ['안녕', '반가워', '누구', '정체', '인사', 'ㅎㅇ', '하이', 'hello'],
+        response: "안녕하십니까! 저는 류승윤 엔지니어의 로봇 제어 통합 포트폴리오를 안내하는 'System-1 AI 비서'입니다. 기술 스택, 프로젝트, 혹은 제어 철학에 대해 궁금한 점을 편하게 질문해 주십시오."
+    },
+    {
+        keywords: ['철학', '마인드', 'system-1', 'system1', '시스템1', '가치관', '생각', '모토'],
+        response: "류승윤 엔지니어의 핵심 철학은 '먼저 생각하지 않고, 먼저 반응하는 로봇'입니다. 보스턴 다이내믹스와 같이 예측 불가능한 외부 외란(Disturbance)에 대해 복잡한 연산을 줄이고 딜레이 없이 즉각적으로 대응하는 System-1 수준의 모터/하드웨어 제어 최적화를 추구합니다."
+    },
+    {
+        keywords: ['기술', '스택', '스킬', '할줄아는', '역량', '스펙', '언어', 'c', 'cpp', '파이썬', 'python', 'ros', 'c++'],
+        response: "주요 기술 스택은 C/C++ 및 Python이며, ROS/ROS2 기반의 프레임워크 위에서 임베디드 펌웨어 제어(CAN, EtherCAT 통신)와 로봇 자율주행, 매니퓰레이터 제어 통합에 강점을 가지고 있습니다. 특히 소프트웨어와 하드웨어의 경계에서 작동하는 미들웨어 최적화를 다룹니다."
+    },
+    {
+        keywords: ['프로젝트', '2026', '2025', '경험', '포트폴리오', '작업물', '뭐했어', '결과물'],
+        response: "현재 포트폴리오에는 2026 프로젝트와 2025 프로젝트가 정리되어 있습니다. 험지 돌파용 사족보행 로봇 제어, 임베디드 모터 통합 제어 보드 등에 대한 구체적인 경험을 영상 및 코드로 확인하실 수 있습니다!",
+        actionText: "2026 프로젝트 엿보기 →",
+        actionLink: "project1.html"
+    },
+    {
+        keywords: ['질문', 'qna', '게시판', '궁금한', '물어', '커뮤니티'],
+        response: "포트폴리오 내용 외에 추가로 궁금한 점이 있으시거나 다른 사람들의 질문이 보고 싶으신가요? Q&A 게시판에서 익명으로 질문을 남기거나 추천된 글들을 읽어보실 수 있습니다.",
+        actionText: "Q&A 게시판 바로가기 →",
+        actionLink: "board.html"
+    },
+    {
+        keywords: ['연락', '컨택', '채용', '면접', '번호', '이메일', '이력서', '전화', 'contact'],
+        response: "채용 및 협업 제안은 언제나 대환영입니다! 제안하실 내용이나 면접 일정이 있으신 경우 즉시 확인 후 가장 빠르게 회신 드리겠습니다.",
+        actionText: "제안 및 연락하기 [CONTACT] →",
+        actionLink: "contact.html"
+    },
+    {
+        keywords: ['보스턴', '다이내믹스', '보스턴다이나믹스', '목표회사', '지원', 'boston'],
+        response: "맞습니다. 보스턴 다이내믹스(Boston Dynamics)에서 보여주는 압도적인 하드웨어 제어와 밸런싱 능력이 류승윤 엔지니어의 궁극적인 지향점입니다. 실환경에서의 검증과 강건한(Robust) 제어를 구현하는 엔지니어가 되기 위해 끝없이 궤적을 밟고 있습니다."
+    },
+    {
+        keywords: ['이름', '개발자', '엔지니어', '류승윤', '승윤'],
+        response: "설계자 류승윤 님은 가상 시뮬레이션을 넘어 모터 발열, 통신 지연 등 실제 하드웨어의 한계와 직접 부딪치며 시스템 전체를 통합 제어해내는 진짜 '하드웨어 최적화 엔지니어'입니다."
+    }
+];
+
+window.submitAiQuery = function(btnElement, query) {
+    if (btnElement.closest('#mini-agent-window')) {
+        document.getElementById('mini-input').value = query;
+        document.getElementById('mini-send').click();
+    } else {
+        document.getElementById('ai-input-field').value = query;
+        document.getElementById('ai-send-btn').click();
+    }
+};
+
+function getSystem1Response(input) {
+    if (!input) return null;
+    const text = input.replace(/\s+/g, '').toLowerCase();
+    
+    let finalResponse = {
+        text: "앗, 시스템에 학습되지 않은 질문이네요. 😅 하지만 아래의 예시 질문들을 클릭해 보시면 답변을 들으실 수 있습니다!",
+        linkHtml: `
+            <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
+                <button class="ai-suggest-btn glow-hover" style="background:#fff; color:#4a43d1; border:1px solid rgba(122,115,255,0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-radius:10px; padding:10px 12px; font-weight:800; font-size:0.85rem; cursor:pointer; text-align:left; transition:all 0.2s;" onmouseover="this.style.background='#eef0ff'; this.style.borderColor='#7a73ff';" onmouseout="this.style.background='#fff'; this.style.borderColor='rgba(122,115,255,0.4)';" onclick="window.submitAiQuery(this, '기술스택 요약해줘')">💡 주요 기술 스택이 뭐야?</button>
+                <button class="ai-suggest-btn glow-hover" style="background:#fff; color:#4a43d1; border:1px solid rgba(122,115,255,0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-radius:10px; padding:10px 12px; font-weight:800; font-size:0.85rem; cursor:pointer; text-align:left; transition:all 0.2s;" onmouseover="this.style.background='#eef0ff'; this.style.borderColor='#7a73ff';" onmouseout="this.style.background='#fff'; this.style.borderColor='rgba(122,115,255,0.4)';" onclick="window.submitAiQuery(this, '2026 프로젝트 설명해줘')">📋 2026 프로젝트 설명해줘</button>
+                <button class="ai-suggest-btn glow-hover" style="background:#fff; color:#4a43d1; border:1px solid rgba(122,115,255,0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-radius:10px; padding:10px 12px; font-weight:800; font-size:0.85rem; cursor:pointer; text-align:left; transition:all 0.2s;" onmouseover="this.style.background='#eef0ff'; this.style.borderColor='#7a73ff';" onmouseout="this.style.background='#fff'; this.style.borderColor='rgba(122,115,255,0.4)';" onclick="window.submitAiQuery(this, '어떻게 연락하면 돼')">📞 면접/협업 연락 방법은?</button>
+            </div>
+        `
+    };
+    let maxMatchScore = 0;
+    
+    for (let i = 0; i < sys1KnowledgeBase.length; i++) {
+        let matchScore = 0;
+        const entry = sys1KnowledgeBase[i];
+        
+        entry.keywords.forEach(kw => {
+            if (text.includes(kw.toLowerCase())) {
+                matchScore++;
+            }
+        });
+        
+        if (matchScore > maxMatchScore) {
+            maxMatchScore = matchScore;
+            finalResponse.text = entry.response;
+            if (entry.actionLink && entry.actionText) {
+                finalResponse.linkHtml = `<a href="${entry.actionLink}" style="display:inline-block; margin-top:12px; padding:8px 16px; background:linear-gradient(135deg, #7a73ff, #00e5ff); color:#fff; border-radius:20px; text-decoration:none; font-size:0.85rem; font-weight:bold; box-shadow:0 4px 10px rgba(0,229,255,0.3); transition:transform 0.2s;">${entry.actionText}</a>`;
+            } else {
+                finalResponse.linkHtml = "";
+            }
+        }
+    }
+    
+    return finalResponse.text + (finalResponse.linkHtml ? "<br>" + finalResponse.linkHtml : "");
+}
+
+// AI Assistant Interaction Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const modelContainer = document.getElementById('hero-model-wrap');
+    const navAssistBtn = document.getElementById('nav-assist-btn');
+    const dragHintText = document.getElementById('drag-action-text');
+
+    function openMiniAgent(onCloseCallback) {
+        if (document.getElementById('mini-agent-window')) return;
+        
+        const win = document.createElement('div');
+        win.id = 'mini-agent-window';
+        win.innerHTML = `
+            <div id="mini-agent-header" style="cursor: move; display:flex; justify-content:space-between; align-items:center; background: linear-gradient(135deg, rgba(235, 240, 255, 0.95), rgba(255, 235, 245, 0.95)); padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.7);">
+                <div style="font-weight:bold; color:#223; font-family:var(--font-heading); font-size: 0.9rem; display:flex; align-items:center; gap:8px;">
+                    <div style="width:10px; height:10px; border-radius:50%; background:#00e5ff; box-shadow:0 0 10px #00e5ff; animation: pulseBadge 2.5s infinite;"></div>
+                    System-1 Mini Assist
+                </div>
+                <button id="mini-agent-close" style="background:none; border:none; color:#ff3366; font-weight:bold; cursor:pointer; font-size:1.1rem; padding:0 5px;">&times;</button>
+            </div>
+            <div id="mini-messages" style="flex:1; overflow-y:auto; padding: 15px; display:flex; flex-direction:column; gap:10px; background:rgba(255,255,255,0.7);">
+                <div style="background:linear-gradient(135deg, #e6e9ff, #f2e6ff); color:#111; padding:10px 14px; border-radius:15px; border-bottom-left-radius:0; font-size:0.85rem; font-weight:600; box-shadow:0 4px 10px rgba(0,0,0,0.05); align-self:flex-start; max-width:85%;">진행을 도와드릴까요? 어떤 도움이 필요하신가요?</div>
+            </div>
+            <div style="padding:10px; background:rgba(255,255,255,0.8); border-top:1px solid rgba(255,255,255,0.9); display:flex; gap:5px;">
+                <input type="text" id="mini-input" placeholder="질문을 입력하세요..." style="flex:1; border-radius:15px; border:1px solid rgba(0,0,0,0.1); padding:8px 12px; font-size:0.85rem; outline:none;">
+                <button id="mini-send" style="background:linear-gradient(135deg, #7a73ff, #00e5ff); border:none; border-radius:15px; color:#fff; font-weight:bold; padding:0 15px; cursor:pointer; font-size:0.8rem; box-shadow:0 4px 10px rgba(0,229,255,0.3);">전송</button>
+            </div>
+        `;
+        
+        win.style.position = 'fixed'; win.style.bottom = '40px'; win.style.right = '40px'; win.style.width = '320px'; win.style.height = '450px';
+        win.style.backgroundColor = 'rgba(255, 255, 255, 0.85)'; win.style.backdropFilter = 'blur(25px)'; win.style.border = '1px solid rgba(255,255,255,0.5)';
+        win.style.borderRadius = '20px'; win.style.boxShadow = '0 15px 50px rgba(0,0,0,0.15), 0 0 40px rgba(122, 115, 255, 0.1)';
+        win.style.zIndex = '999999'; win.style.display = 'flex'; win.style.flexDirection = 'column'; win.style.overflow = 'hidden';
+        win.style.opacity = '0'; win.style.transform = 'translateY(30px)'; win.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        
+        document.body.appendChild(win);
+        
+        setTimeout(() => { win.style.opacity = '1'; win.style.transform = 'translateY(0)'; }, 10);
+        
+        const header = document.getElementById('mini-agent-header');
+        let isDragging = false, startX, startY, initialX, initialY;
+        
+        header.addEventListener('pointerdown', (e) => {
+            isDragging = true; startX = e.clientX; startY = e.clientY;
+            const rect = win.getBoundingClientRect(); initialX = rect.left; initialY = rect.top;
+            win.style.bottom = 'auto'; win.style.right = 'auto'; win.style.left = initialX + 'px'; win.style.top = initialY + 'px';
+            win.style.transition = 'none'; e.preventDefault();
+        });
+        
+        window.addEventListener('pointermove', (e) => {
+            if(!isDragging) return;
+            win.style.left = (initialX + (e.clientX - startX)) + 'px'; win.style.top = (initialY + (e.clientY - startY)) + 'px';
+        });
+        
+        window.addEventListener('pointerup', () => { 
+            if(isDragging) { isDragging = false; win.style.transition = 'opacity 0.3s, transform 0.3s'; }
+        });
+        
+        document.getElementById('mini-agent-close').addEventListener('click', () => {
+            win.style.opacity = '0'; win.style.transform = 'scale(0.9)'; setTimeout(() => win.remove(), 300);
+            if(onCloseCallback) onCloseCallback();
+        });
+        
+        const sendMsg = () => {
+            const text = document.getElementById('mini-input').value.trim();
+            if(!text) return;
+            const msgs = document.getElementById('mini-messages');
+            const uMsg = document.createElement('div');
+            uMsg.style.cssText = 'background:rgba(0,0,0,0.8); color:#fff; padding:10px 14px; border-radius:15px; border-bottom-right-radius:0; font-size:0.85rem; align-self:flex-end; max-width:85%; box-shadow:0 4px 10px rgba(0,0,0,0.1);';
+            uMsg.innerText = text; msgs.appendChild(uMsg);
+            document.getElementById('mini-input').value = ''; msgs.scrollTop = msgs.scrollHeight;
+            
+            setTimeout(() => {
+                const bMsg = document.createElement('div');
+                bMsg.style.cssText = 'background:linear-gradient(135deg, #e6e9ff, #f2e6ff); color:#111; padding:10px 14px; border-radius:15px; border-bottom-left-radius:0; font-size:0.85rem; font-weight:600; align-self:flex-start; max-width:85%; box-shadow:0 4px 10px rgba(0,0,0,0.05); white-space: pre-wrap; line-height: 1.5;';
+                
+                // Show loading indicator
+                bMsg.innerHTML = '<span style="color:#7a73ff;">생각 중...</span>';
+                msgs.appendChild(bMsg);
+                msgs.scrollTop = msgs.scrollHeight;
+                
+                setTimeout(() => {
+                    bMsg.innerHTML = getSystem1Response(text);
+                    msgs.scrollTop = msgs.scrollHeight;
+                }, 600);
+            }, 300);
+        };
+        document.getElementById('mini-send').addEventListener('click', sendMsg);
+        document.getElementById('mini-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMsg(); });
+    }
+
+    if(!modelContainer) {
+        const assistLinks = document.querySelectorAll('#nav-assist-btn, a[href*="#assist"]');
+        assistLinks.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.innerWidth <= 768) return; 
+                history.replaceState('', document.title, window.location.pathname);
+                openMiniAgent();
+            });
+        });
+        if (window.location.hash === '#assist' && window.innerWidth > 768) {
+            setTimeout(() => openMiniAgent(), 500);
+            history.replaceState('', document.title, window.location.pathname);
+        }
+        return;
+    }
+
+    let isAiMode = false;
+    let pointerStartX = 0;
+    let isTrackingDrop = false;
+    let miniAgentMode = false;
+
+    const setAiMode = (active) => {
+        isAiMode = active;
+        if (active) {
+            if (window.scrollY > 200) {
+                // If activated while scrolled down, bypass big UI and show mini instantly
+                openMiniAgent(() => {
+                    isAiMode = false;
+                    miniAgentMode = false;
+                });
+                miniAgentMode = true;
+            } else {
+                document.body.classList.add('ai-mode-active');
+                if (dragHintText) dragHintText.innerText = "오른쪽으로 당겨보세요!";
+                miniAgentMode = false;
+            }
+        } else {
+            document.body.classList.remove('ai-mode-active');
+            if (dragHintText) dragHintText.innerText = "왼쪽으로 당겨보세요!";
+            const win = document.getElementById('mini-agent-window');
+            if (win) { win.style.opacity = '0'; win.style.transform = 'scale(0.9)'; setTimeout(() => win.remove(), 300); }
+            miniAgentMode = false;
+            // Provide a short lockout to prevent double triggers
+            setTimeout(() => { if(!isAiMode && typeof isTrackingDrop !== "undefined") { } }, 1200); 
+        }
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!isAiMode) return;
+        
+        if (window.scrollY > 200) {
+            if (!miniAgentMode) {
+                // Switch to Mini Agent
+                document.body.classList.remove('ai-mode-active');
+                openMiniAgent(() => {
+                    isAiMode = false;
+                    miniAgentMode = false;
+                });
+                miniAgentMode = true;
+            }
+        } else {
+            if (miniAgentMode) {
+                // Return to Big AI layout
+                const win = document.getElementById('mini-agent-window');
+                if (win) { win.style.opacity = '0'; win.style.transform = 'scale(0.9)'; setTimeout(() => win.remove(), 300); }
+                
+                document.body.classList.add('ai-mode-active');
+                if (dragHintText) dragHintText.innerText = "오른쪽으로 당겨보세요!";
+                miniAgentMode = false;
+            }
+        }
+    });
+
+    modelContainer.addEventListener('pointerdown', (e) => {
+        pointerStartX = e.clientX;
+        isTrackingDrop = true;
+    });
+
+    window.addEventListener('pointermove', (e) => {
+        if (isTrackingDrop) {
+            const dragDistX = e.clientX - pointerStartX;
+            
+            if (!isAiMode) {
+                // Trigger AI when dragged aggressively to the left (-80px)
+                if (dragDistX < -80) {
+                    setAiMode(true);
+                    isTrackingDrop = false; // Prevent multiple triggers
+                }
+            } else {
+                // Trigger Normal Mode when dragged aggressively to the right (+80px)
+                if (dragDistX > 80) {
+                    setAiMode(false);
+                    isTrackingDrop = false; // Prevent multiple triggers
+                }
+            }
+        }
+    });
+
+    window.addEventListener('pointerup', () => {
+        isTrackingDrop = false;
+    });
+
+    // Manual Trigger from ASSIST Nav Tab
+    if (navAssistBtn) {
+        navAssistBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!isAiMode) {
+                setAiMode(true);
+            }
+        });
+    }
+
+    // Checking if launched from another page's ASSIST link
+    if (window.location.hash === '#assist') {
+        const timeToWait = sessionStorage.getItem("introPlayed") ? 500 : 5500;
+        setTimeout(() => {
+            if (!isAiMode) {
+                setAiMode(true);
+                // remove hash for cleanliness
+                history.replaceState('', document.title, window.location.pathname); 
+            }
+        }, timeToWait); // Account for loading screen
+    }
+    // Make "Intro" (소개) tab fully refresh the page
+    const introLinks = document.querySelectorAll('nav a[data-ko="소개"]');
+    introLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
+                window.location.reload();
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    });
+
+    const closeBtn = document.getElementById('ai-close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+             setAiMode(false);
+        });
+    }
+
+    // AI Chat Dummy Logic
+    const sendBtn = document.getElementById('ai-send-btn');
+    const inputField = document.getElementById('ai-input-field');
+    const messagesContainer = document.getElementById('ai-messages');
+
+    if (sendBtn && inputField && messagesContainer) {
+        const sendMsg = () => {
+            const text = inputField.value.trim();
+            if(!text) return;
+            
+            // User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'ai-msg ai-sent';
+            userMsg.innerText = text;
+            messagesContainer.appendChild(userMsg);
+            
+            inputField.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Mock AI Response
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'ai-msg ai-received';
+                botMsg.innerHTML = '<span style="color:#7a73ff; font-weight:bold;">데이터 패킷 분석 중...</span>';
+                messagesContainer.appendChild(botMsg);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                
+                setTimeout(() => {
+                    botMsg.innerHTML = getSystem1Response(text);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }, 700);
+            }, 300);
+        };
+
+        sendBtn.addEventListener('click', sendMsg);
+        inputField.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') sendMsg();
+        });
+    }
+});
