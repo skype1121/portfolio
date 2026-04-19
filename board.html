@@ -184,6 +184,31 @@
             color: #00ff64;
         }
 
+        .action-text-btn.like {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .action-text-btn.like:hover,
+        .action-text-btn.like.liked {
+            color: #ff3366;
+        }
+
+        .action-text-btn.like.liked svg path {
+            fill: rgba(255, 51, 102, 0.4);
+        }
+
+        .action-text-btn.like.top-liked {
+            color: #ffd700 !important;
+            font-weight: bold;
+        }
+
+        .action-text-btn.like.top-liked svg path {
+            fill: rgba(255, 215, 0, 0.6);
+            stroke: #ffd700;
+        }
+
         /* Clean Form Design */
         .board-form {
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 100%);
@@ -191,7 +216,7 @@
             padding: 2.5rem 2rem;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: inset 0 0 20px rgba(0,229,255,0.03);
+            box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.03);
         }
 
         .board-input,
@@ -262,15 +287,19 @@
 
     <nav>
         <!-- Logo Area -->
-        <div class="nav-logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="window.location.href='index.html'">
+        <div class="nav-logo" style="display: flex; align-items: center; gap: 12px; cursor: pointer;"
+            onclick="window.location.href='index.html'">
             <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" stroke="#8b5cf6" stroke-width="6" stroke-linejoin="round" fill="rgba(139, 92, 246, 0.1)"/>
-                <path d="M50 5 L50 50 L90 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
-                <path d="M50 50 L10 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"/>
-                <path d="M10 27 L50 50 L90 27" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" stroke-dasharray="4 4"/>
-                <circle cx="50" cy="50" r="4" fill="#00e5ff"/>
+                <path d="M50 5 L90 27 L90 73 L50 95 L10 73 L10 27 Z" stroke="#8b5cf6" stroke-width="6"
+                    stroke-linejoin="round" fill="rgba(139, 92, 246, 0.1)" />
+                <path d="M50 5 L50 50 L90 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" />
+                <path d="M50 50 L10 73" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round" />
+                <path d="M10 27 L50 50 L90 27" stroke="#8b5cf6" stroke-width="5" stroke-linejoin="round"
+                    stroke-dasharray="4 4" />
+                <circle cx="50" cy="50" r="4" fill="#00e5ff" />
             </svg>
-            <span style="color: #fff; font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; letter-spacing: 1px;">RSY</span>
+            <span
+                style="color: #fff; font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; letter-spacing: 1px;">RSY</span>
         </div>
 
         <div style="display: flex; align-items: stretch; gap: 0.5rem; height: 100%;">
@@ -322,12 +351,23 @@
 
                 <button type="button" class="board-submit lang-text" onclick="savePost()" data-ko="게시하기"
                     data-en="Post">게시하기</button>
-                    
+
                 <!-- Fast Contact UI -->
-                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed rgba(255,255,255,0.1); text-align: center;">
-                    <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.8rem; letter-spacing: 1px;">DIRECT CONTACT //</div>
-                    <a href="contact.html" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,229,255,0.05); color: var(--bd-cyan); border: 1px solid var(--bd-cyan); padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; font-family: var(--font-mono); font-size: 0.85rem; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,229,255,0.1);" onmouseover="this.style.background='var(--bd-cyan)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--bd-cyan)';" onmouseout="this.style.background='rgba(0,229,255,0.05)'; this.style.color='var(--bd-cyan)'; this.style.boxShadow='0 0 10px rgba(0,229,255,0.1)';">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <div
+                    style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed rgba(255,255,255,0.1); text-align: center;">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.8rem; letter-spacing: 1px;">
+                        DIRECT CONTACT //</div>
+                    <a href="contact.html"
+                        style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0,229,255,0.05); color: var(--bd-cyan); border: 1px solid var(--bd-cyan); padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; font-family: var(--font-mono); font-size: 0.85rem; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,229,255,0.1);"
+                        onmouseover="this.style.background='var(--bd-cyan)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--bd-cyan)';"
+                        onmouseout="this.style.background='rgba(0,229,255,0.05)'; this.style.color='var(--bd-cyan)'; this.style.boxShadow='0 0 10px rgba(0,229,255,0.1)';">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
                         <span>SEND EMAIL DIRECTLY</span>
                     </a>
                 </div>
@@ -342,7 +382,20 @@
         const STORAGE_KEY = 'sys1_qa_logs';
 
         function getPosts() {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            let posts = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            let modified = false;
+            posts.forEach(p => {
+                if (p.replies) {
+                    p.replies.forEach(r => {
+                        if (!r.id) {
+                            r.id = 'REP_' + Date.now().toString(36) + Math.random().toString(36).substr(2);
+                            modified = true;
+                        }
+                    });
+                }
+            });
+            if (modified) savePosts(posts);
+            return posts;
         }
 
         function savePosts(posts) {
@@ -352,6 +405,19 @@
         function renderPosts() {
             const posts = getPosts();
             const list = document.getElementById('postsList');
+            const likedIds = JSON.parse(localStorage.getItem('sys1_qa_liked_ids') || '[]');
+
+            let activeReplyFormState = null;
+            const existingForm = document.getElementById('active-reply-form');
+            if (existingForm) {
+                activeReplyFormState = {
+                    postId: existingForm.getAttribute('data-post-id'),
+                    replyId: existingForm.getAttribute('data-reply-id') || null,
+                    author: document.getElementById('replyAuthor').value,
+                    content: document.getElementById('replyContent').value
+                };
+            }
+
             list.innerHTML = '';
 
             const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
@@ -360,6 +426,16 @@
                 list.innerHTML = `<div style="text-align: center; color: rgba(255,255,255,0.3); font-family: var(--font-mono); padding: 5rem 0; font-size: 1.1rem;">${isEn ? 'No posts yet. Start the conversation!' : '게시물이 텅 비어있습니다. 첫 글을 남겨주세요!'}</div>`;
                 return;
             }
+
+            let maxLikes = 0;
+            posts.forEach(p => {
+                if ((p.likes || 0) > maxLikes) maxLikes = p.likes;
+                if (p.replies) {
+                    p.replies.forEach(r => {
+                        if ((r.likes || 0) > maxLikes) maxLikes = r.likes;
+                    });
+                }
+            });
 
             // 가장 최신의 질문이 위로 올라오게 해줘 (내림차순)
             posts.sort((a, b) => b.timestamp - a.timestamp);
@@ -374,17 +450,36 @@
                 if (post.replies && post.replies.length > 0) {
                     post.replies.forEach(reply => {
                         const rDate = new Date(reply.timestamp).toLocaleString(isEn ? 'en-US' : 'ko-KR', formatOpts);
+
+                        const rLikes = reply.likes || 0;
+                        const rIsTop = (rLikes === maxLikes && maxLikes > 0);
+                        const rIsLiked = likedIds.includes(reply.id);
+                        const rLikeClass = rIsTop ? 'top-liked' : (rIsLiked ? 'liked' : '');
+
                         repliesHtml += `
-                            <div class="reply-block">
+                            <div class="reply-block" id="reply-${reply.id}">
                                 <div class="reply-header">
                                     <div class="reply-author">${escapeHtml(reply.author)} <span class="reply-badge">REPLY</span></div>
                                     <div class="post-meta">${rDate}</div>
                                 </div>
                                 <div class="post-content">${escapeHtml(reply.content)}</div>
+                                <div style="text-align: right; margin-top: 0.8rem;">
+                                    <button class="action-text-btn edit" onclick="openReplyForm('${post.id}', '${reply.id}')" style="margin-right: 1.2rem;">${isEn ? 'Edit' : '수정'}</button>
+                                    <button class="action-text-btn delete" onclick="deleteReply('${post.id}', '${reply.id}')" style="margin-right: 1.2rem;">${isEn ? 'Delete' : '삭제'}</button>
+                                    <button class="action-text-btn like ${rLikeClass}" onclick="toggleLike('${reply.id}', true, '${post.id}')">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -2px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        ${isEn ? 'Recommend (' : '추천 ('}${rLikes})
+                                    </button>
+                                </div>
                             </div>
                         `;
                     });
                 }
+
+                const pLikes = post.likes || 0;
+                const pIsTop = (pLikes === maxLikes && maxLikes > 0);
+                const pIsLiked = likedIds.includes(post.id);
+                const pLikeClass = pIsTop ? 'top-liked' : (pIsLiked ? 'liked' : '');
 
                 const card = document.createElement('div');
                 card.className = 'post-card';
@@ -399,6 +494,10 @@
                     ${repliesHtml}
 
                     <div class="post-actions">
+                        <button class="action-text-btn like ${pLikeClass}" onclick="toggleLike('${post.id}', false)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -2px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            ${isEn ? 'Recommend (' : '추천 ('}${pLikes})
+                        </button>
                         <button class="action-text-btn reply" onclick="openReplyForm('${post.id}')">${isEn ? 'Reply' : '답변하기'}</button>
                         <button class="action-text-btn edit" onclick="editPost('${post.id}')">${isEn ? 'Edit' : '수정'}</button>
                         <button class="action-text-btn delete" onclick="deletePost('${post.id}')">${isEn ? 'Delete' : '삭제'}</button>
@@ -406,30 +505,64 @@
                 `;
                 list.appendChild(card);
             });
+
+            if (activeReplyFormState) {
+                openReplyForm(activeReplyFormState.postId, activeReplyFormState.replyId);
+                document.getElementById('replyAuthor').value = activeReplyFormState.author;
+                document.getElementById('replyContent').value = activeReplyFormState.content;
+            }
         }
 
-        function openReplyForm(postId) {
+        function openReplyForm(postId, replyId = null) {
             const existing = document.getElementById('active-reply-form');
             if (existing) existing.remove();
 
             const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
-            const postEl = document.getElementById('post-' + postId);
+
+            let targetEl = document.getElementById('post-' + postId);
+            let defaultAuthor = '';
+            let defaultContent = '';
+
+            if (replyId) {
+                const replyEl = document.getElementById('reply-' + replyId);
+                if (replyEl) {
+                    targetEl = replyEl;
+                    let posts = getPosts();
+                    let parentPost = posts.find(p => p.id === postId);
+                    if (parentPost && parentPost.replies) {
+                        let r = parentPost.replies.find(x => x.id === replyId);
+                        if (r) {
+                            defaultAuthor = r.author;
+                            defaultContent = r.content;
+                        }
+                    }
+                }
+            }
+
+            const headerHtml = replyId
+                ? `<div style="font-family: var(--font-mono); font-size: 0.85rem; color: #00e5ff; margin-bottom: 1.5rem; letter-spacing:1px;">${isEn ? 'EDIT REPLY' : '답변 수정'}</div>`
+                : `<div style="font-family: var(--font-mono); font-size: 0.85rem; color: #00ff64; margin-bottom: 1.5rem; letter-spacing:1px;">${isEn ? 'WRITE REPLY' : '새로운 답변 작성'}</div>`;
 
             const formHtml = `
-                <div id="active-reply-form" class="reply-form-container">
-                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #00ff64; margin-bottom: 1.5rem; letter-spacing:1px;">${isEn ? 'WRITE REPLY' : '새로운 답변 작성'}</div>
-                    <input type="text" id="replyAuthor" class="board-input" placeholder="${isEn ? 'Name' : '이름'}" style="padding: 0.5rem 0;" required>
+                <div id="active-reply-form" class="reply-form-container" data-post-id="${postId}" data-reply-id="${replyId || ''}">
+                    ${headerHtml}
+                    <input type="text" id="replyAuthor" class="board-input" placeholder="${isEn ? 'Name' : '이름'}" style="padding: 0.5rem 0;" value="" required>
                     <textarea id="replyContent" class="board-textarea" placeholder="${isEn ? 'Reply content...' : '답변을 적어주세요...'}" style="min-height: 60px; padding: 0.5rem 0;" required></textarea>
                     <div style="text-align: right; display: flex; gap: 1.5rem; justify-content: flex-end; margin-top: 0.5rem;">
                         <button class="action-text-btn" onclick="document.getElementById('active-reply-form').remove()">${isEn ? 'Cancel' : '취소'}</button>
-                        <button class="action-text-btn reply" style="font-weight:bold;" onclick="submitReply('${postId}')">${isEn ? 'Post Reply' : '답변 등록'}</button>
+                        <button class="action-text-btn reply" style="font-weight:bold;" onclick="submitReply('${postId}', '${replyId || ''}')">${isEn ? (replyId ? 'Save Edit' : 'Post Reply') : (replyId ? '수정 완료' : '답변 등록')}</button>
                     </div>
                 </div>
             `;
-            postEl.insertAdjacentHTML('beforeend', formHtml);
+            targetEl.insertAdjacentHTML('beforeend', formHtml);
+
+            if (replyId) {
+                document.getElementById('replyAuthor').value = defaultAuthor;
+                document.getElementById('replyContent').value = defaultContent;
+            }
         }
 
-        function submitReply(postId) {
+        function submitReply(postId, replyId = null) {
             const author = document.getElementById('replyAuthor').value.trim();
             const content = document.getElementById('replyContent').value.trim();
             const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
@@ -443,8 +576,28 @@
             const targetIndex = posts.findIndex(p => p.id === postId);
             if (targetIndex > -1) {
                 if (!posts[targetIndex].replies) posts[targetIndex].replies = [];
-                posts[targetIndex].replies.push({ author: author, content: content, timestamp: Date.now() });
+
+                if (replyId) {
+                    const rIndex = posts[targetIndex].replies.findIndex(r => r.id === replyId);
+                    if (rIndex > -1) {
+                        posts[targetIndex].replies[rIndex].author = author;
+                        posts[targetIndex].replies[rIndex].content = content;
+                    }
+                } else {
+                    posts[targetIndex].replies.push({
+                        id: 'REP_' + Date.now().toString(36) + Math.random().toString(36).substr(2),
+                        author: author,
+                        content: content,
+                        timestamp: Date.now(),
+                        likes: 0
+                    });
+                }
                 savePosts(posts);
+
+                // Remove form before re-render so it's not restored by the state preservation logic
+                const existingForm = document.getElementById('active-reply-form');
+                if (existingForm) existingForm.remove();
+
                 renderPosts();
             }
         }
@@ -482,7 +635,8 @@
                     author: author,
                     content: content,
                     timestamp: Date.now(),
-                    replies: []
+                    replies: [],
+                    likes: 0
                 });
             }
 
@@ -510,6 +664,52 @@
             if (confirm(msg)) {
                 let posts = getPosts();
                 posts = posts.filter(p => p.id !== id);
+                savePosts(posts);
+                renderPosts();
+            }
+        }
+
+        function deleteReply(postId, replyId) {
+            const isEn = document.querySelector('.pill-btn.active') ? document.querySelector('.pill-btn.active').innerText === 'EN' : false;
+            const msg = isEn ? 'Are you sure you want to delete this reply?' : '해당 답변을 삭제하시겠습니까? (되돌릴 수 없습니다)';
+            if (confirm(msg)) {
+                let posts = getPosts();
+                const post = posts.find(p => p.id === postId);
+                if (post && post.replies) {
+                    post.replies = post.replies.filter(r => r.id !== replyId);
+                    savePosts(posts);
+                    renderPosts();
+                }
+            }
+        }
+
+        function toggleLike(id, isReply, parentId) {
+            let posts = getPosts();
+            let likedIds = JSON.parse(localStorage.getItem('sys1_qa_liked_ids') || '[]');
+
+            const hasLiked = likedIds.includes(id);
+
+            let targetNode = null;
+            if (isReply) {
+                const parent = posts.find(p => p.id === parentId);
+                if (parent && parent.replies) {
+                    targetNode = parent.replies.find(r => r.id === id);
+                }
+            } else {
+                targetNode = posts.find(p => p.id === id);
+            }
+
+            if (targetNode) {
+                targetNode.likes = targetNode.likes || 0;
+                if (hasLiked) {
+                    targetNode.likes = Math.max(0, targetNode.likes - 1);
+                    likedIds = likedIds.filter(i => i !== id);
+                } else {
+                    targetNode.likes += 1;
+                    likedIds.push(id);
+                }
+
+                localStorage.setItem('sys1_qa_liked_ids', JSON.stringify(likedIds));
                 savePosts(posts);
                 renderPosts();
             }
