@@ -1061,3 +1061,175 @@ body.light-theme .signal-node { background: #000; border-color: #333; box-shadow
     bottom: auto;
     margin-left: 20px;
 }
+
+/* --- Creative Loading Screen --- */
+.creative-loader {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+    font-family: var(--font-mono);
+}
+
+.creative-loader.hidden {
+    pointer-events: none;
+}
+
+.door {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    height: 50vh;
+    background: #030405;
+    transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+    z-index: 1;
+}
+
+.cl-top-door {
+    top: 0;
+    border-bottom: 1px solid rgba(0,229,255,0.3);
+}
+
+.cl-bottom-door {
+    bottom: 0;
+    border-top: 1px solid rgba(0,229,255,0.3);
+}
+
+.creative-loader.hidden .cl-top-door {
+    transform: translateY(-100%);
+}
+
+.creative-loader.hidden .cl-bottom-door {
+    transform: translateY(100%);
+}
+
+.cl-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.creative-loader.hidden .cl-content {
+    opacity: 0;
+}
+
+/* System Boot Effect */
+.sys-boot-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 2rem;
+    font-size: 0.8rem;
+    color: var(--bd-cyan);
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: loaderFadeInStep 0.1s forwards 0.3s;
+}
+
+.sys-pulse-circle {
+    width: 12px; height: 12px;
+    background: #00ff64;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00ff64;
+    animation: loaderFlash 0.1s infinite alternate;
+}
+
+#loader-latency {
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Typography styles */
+.cl-name {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 0.2rem;
+    letter-spacing: 12px;
+    opacity: 0;
+    text-shadow: 0 5px 25px rgba(255,255,255,0.2);
+    animation: loaderTextFlicker 0.4s forwards 2.0s; /* Happens when latency hits 14us */
+    position: relative;
+}
+
+.glitch-intro::before, .glitch-intro::after {
+    content: attr(data-text);
+    position: absolute; top: 0; left: 0; opacity: 0.8;
+}
+.glitch-intro::before { animation: glitchC 2s infinite linear alternate-reverse; color: #ff00ff; z-index: -1; }
+.glitch-intro::after { animation: glitchC 3s infinite linear alternate-reverse; color: #00ffff; z-index: -2; }
+
+.cl-role {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 6px;
+    border-bottom: 1px dashed rgba(255,255,255,0.2);
+    padding-bottom: 20px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: loaderFadeInStep 0.1s forwards 2.4s;
+}
+
+.cl-quote-box {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.8;
+    text-align: center;
+    position: relative;
+}
+
+.quote-line {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    margin: 0 auto;
+}
+
+.ql-1 {
+    animation: loaderTypeWord 0.4s steps(20, end) forwards 2.8s;
+}
+.ql-2 {
+    color: #00ff64; 
+    text-shadow: 0 0 10px rgba(0,255,100,0.4);
+    animation: loaderTypeWord 0.5s steps(20, end) forwards 3.3s;
+}
+
+/* Animations */
+@keyframes loaderFlash {
+    from { opacity: 0.3; } to { opacity: 1; }
+}
+
+@keyframes loaderFadeInStep {
+    to { opacity: 1; }
+}
+
+@keyframes loaderTextFlicker {
+    0% { opacity: 0; transform: scale(1.05); }
+    10% { opacity: 1; filter: invert(1); }
+    20% { opacity: 0; }
+    40% { opacity: 1; filter: none; color: #00ff64; text-shadow: 0 0 20px #00ff64, 0 0 40px rgba(0,255,100,0.5); }
+    50% { opacity: 0; }
+    100% { opacity: 1; transform: scale(1); color: #fff;}
+}
+
+@keyframes loaderTypeWord {
+    to { width: 100%; }
+}
+
+body.loading-active {
+    overflow: hidden;
+}

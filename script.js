@@ -1176,3 +1176,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     */
 });
+
+// Cinematic Loader Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("intro-loading-screen");
+    if (loader) {
+        if (!sessionStorage.getItem("introPlayed")) {
+            document.body.classList.add("loading-active");
+            sessionStorage.setItem("introPlayed", "true");
+            
+            // Latency drop simulation
+            const latencyEl = document.getElementById("loader-latency");
+            if (latencyEl) {
+                let lat = 999;
+                const interval = setInterval(() => {
+                    lat -= Math.floor(Math.random() * 50) + 20;
+                    if (lat <= 14) {
+                        lat = 14;
+                        clearInterval(interval);
+                        latencyEl.innerText = lat + 'µs [LOCKED]';
+                        latencyEl.style.color = '#00ff64';
+                        
+                        const pulse = document.querySelector('.sys-pulse-circle');
+                        if (pulse) {
+                            pulse.style.animation = 'none';
+                            pulse.style.boxShadow = '0 0 20px #00ff64, 0 0 40px #00ff64';
+                        }
+                    } else {
+                        latencyEl.innerText = lat + 'µs';
+                    }
+                }, 30); // Rapid drop
+            }
+
+            // Door open and fade sequence
+            setTimeout(() => {
+                loader.classList.add("hidden");
+                document.body.classList.remove("loading-active");
+                setTimeout(() => {
+                    loader.style.display = "none";
+                }, 1500); // Wait for the transition
+            }, 5000); // Display for 5 seconds before opening doors
+        } else {
+            loader.style.display = "none";
+        }
+    }
+});
