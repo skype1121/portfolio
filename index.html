@@ -210,19 +210,18 @@
                                 소프트웨어 개발을 목표로 휴머노이드와 로봇암 프로젝트를 직접 설계·구현하고 있습니다. ROS2 기반 제어 구조와 CAN 통신, 모터 드라이버를 구축하며 실제
                                 하드웨어 중심의 안정적인 시스템 개발을 지향합니다. 문제를 단계적으로 분석하고 끝까지 해결하는 개발자 <span
                                     style="white-space: nowrap;"><strong>류승윤</strong>입니다.</span></span>
-                            <div
-                                style="font-family: var(--font-mono); margin-top: 1rem; font-size: 0.85rem; font-weight: bold; color: #000; display: inline-flex; align-items: center; background: rgba(0,0,0,0.05); padding: 6px 12px; border-radius: 4px; box-shadow: inset 0 0 5px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1);">
-                                <svg style="margin-right: 8px;" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path
-                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                    </path>
-                                    <polyline points="22,6 12,13 2,6"></polyline>
-                                </svg>
-                                <span class="lang-text" data-ko="이메일 :" data-en="Email: ">이메일 :</span> <a
-                                    href="mailto:skype1121@dongyang.ac.kr"
-                                    style="color: #000; text-decoration: none; border-bottom: 1px solid #000; margin-left: 4px;">skype1121@dongyang.ac.kr</a>
+                            <div style="margin-top: 1.5rem; display: flex;">
+                                <a href="mailto:skype1121@dongyang.ac.kr"
+                                    style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.85rem; color: #333; background: #f8f9fa; padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 2px 10px rgba(0,0,0,0.03); text-decoration: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);"
+                                    onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 15px rgba(0,0,0,0.08)'; this.style.background='#ffffff'; this.style.borderColor='rgba(0,0,0,0.15)';"
+                                    onmouseout="this.style.transform='none'; this.style.boxShadow='0 2px 10px rgba(0,0,0,0.03)'; this.style.background='#f8f9fa'; this.style.borderColor='rgba(0,0,0,0.08)';">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span class="lang-text" data-ko="이메일" data-en="Email" style="font-weight: 500; color: #777;">이메일</span>
+                                    <strong style="color: #000; letter-spacing: 0.5px;">skype1121@dongyang.ac.kr</strong>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -255,7 +254,7 @@
                 <div class="stage-label">STEP 1. SENSE & PHILOSOPHY</div>
                 <h2>01. CONTROL PHILOSOPHY <span class="tag">System-1 vs System-2</span> <span class="badge-num">14µs
                         LATENCY</span></h2>
-                <div class="content-body"
+                <div class="content-body expanded"
                     style="display:flex; justify-content:space-between; align-items:stretch; gap:3rem;">
                     <div class="why-left" style="flex:0 0 500px; padding-right:20px;">
                         <p class="lang-text"
@@ -268,10 +267,7 @@
                                 style="color:var(--text-main); text-shadow:0 0 10px rgba(0,229,255,0.4);">전신
                                 동역학(Whole-Body Dynamics)</span>을 우선합니다.
                         </p>
-                        <button class="eng-detail-btn lang-text" data-ko="엔지니어링 세부 정보 보기"
-                            data-en="Show Engineering Detail" onclick="toggleDetail('detail-philosophy')"
-                            style="margin-top:20px;">엔지니어링 세부 정보 보기</button>
-                        <div id="detail-philosophy" class="eng-detail-content terminal-ui">
+                        <div id="detail-philosophy" class="eng-detail-content terminal-ui show">
                             <div class="term-header"><span class="dot red"></span><span class="dot yellow"></span><span
                                     class="dot green"></span> <span class="term-title">latency_optimization.sh</span>
                             </div>
@@ -328,7 +324,7 @@ config:
                 <div class="stage-label">STEP 2. COMPUTE & SIM2REAL</div>
                 <h2>02. MIDDLEWARE & RL <span class="tag">Orin Nano & Action Chunking</span> <span
                         class="badge-num">1kHz LOOP</span></h2>
-                <div class="content-body"
+                <div class="content-body expanded"
                     style="display:flex; justify-content:space-between; align-items:stretch; gap:1.5rem;">
                     <div class="why-left" style="flex:0 0 420px; padding-right:10px;">
                         <p class="lang-text"
@@ -339,10 +335,7 @@ config:
                             <strong>Hardware:</strong> Jetson Orin Nano, ROS2 Humble<br>
                             <strong>Sim-to-Real:</strong> Isaac Sim + Diffusion Policy + RTC
                         </p>
-                        <button class="eng-detail-btn lang-text" data-ko="엔지니어링 세부 정보 보기"
-                            data-en="Show Engineering Detail" onclick="toggleDetail('detail-compute')"
-                            style="margin-top:20px;">엔지니어링 세부 정보 보기</button>
-                        <div id="detail-compute" class="eng-detail-content terminal-ui">
+                        <div id="detail-compute" class="eng-detail-content terminal-ui show">
                             <div class="term-header"><span class="dot red"></span><span class="dot yellow"></span><span
                                     class="dot green"></span> <span class="term-title">action_chunking.py</span></div>
                             <div class="pt-container">
@@ -388,7 +381,7 @@ apply_joint_torques(motor_cmd)</code></pre>
                 <div class="stage-label">STEP 3. MECHANISM DESIGN</div>
                 <h2>03. CYCLOIDAL KINEMATICS <span class="tag">Hypo/Epi Curve</span> <span class="badge-num">HW
                         DESIGN</span></h2>
-                <div class="content-body"
+                <div class="content-body expanded"
                     style="display:flex; flex-wrap: wrap; justify-content:space-between; align-items:stretch; gap:3rem;">
                     <div class="why-left" style="flex:0 0 500px; padding-right:20px;">
                         <p class="lang-text"
@@ -399,10 +392,7 @@ apply_joint_torques(motor_cmd)</code></pre>
                             비선형 기어 특성이 로봇 제어 응답성에 미치는 물리적 특성을 연구하고, 백래시(Backlash)를 최소화한 <strong>강건한
                                 투명성(Transparency)</strong>을 확보합니다.
                         </p>
-                        <button class="eng-detail-btn lang-text mt-4" data-ko="엔지니어링 세부 정보 보기"
-                            data-en="Show Engineering Detail" onclick="toggleDetail('detail-actuate')">엔지니어링 세부 정보
-                            보기</button>
-                        <div id="detail-actuate" class="eng-detail-content terminal-ui">
+                        <div id="detail-actuate" class="eng-detail-content terminal-ui show">
                             <div class="term-header"><span class="dot red"></span><span class="dot yellow"></span><span
                                     class="dot green"></span> <span class="term-title">cycloid_generator.py</span></div>
                             <div class="pt-container">

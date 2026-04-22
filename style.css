@@ -1160,7 +1160,7 @@ body.light-theme .signal-node { background: #000; border-color: #333; box-shadow
     letter-spacing: 12px;
     opacity: 0;
     text-shadow: 0 5px 25px rgba(255,255,255,0.2);
-    animation: loaderTextFlicker 0.4s forwards 2.0s; /* Happens when latency hits 14us */
+    animation: loaderTextFlicker 0.4s forwards 0.6s; /* Happens when latency hits 14us */
     position: relative;
 }
 
@@ -1180,7 +1180,7 @@ body.light-theme .signal-node { background: #000; border-color: #333; box-shadow
     padding-bottom: 20px;
     margin-bottom: 2.5rem;
     opacity: 0;
-    animation: loaderFadeInStep 0.1s forwards 2.4s;
+    animation: loaderFadeInStep 0.1s forwards 0.8s;
 }
 
 .cl-quote-box {
@@ -1201,12 +1201,12 @@ body.light-theme .signal-node { background: #000; border-color: #333; box-shadow
 }
 
 .ql-1 {
-    animation: loaderTypeWord 0.4s steps(20, end) forwards 2.8s;
+    animation: loaderTypeWord 0.3s steps(20, end) forwards 0.9s;
 }
 .ql-2 {
     color: #00ff64; 
     text-shadow: 0 0 10px rgba(0,255,100,0.4);
-    animation: loaderTypeWord 0.5s steps(20, end) forwards 3.3s;
+    animation: loaderTypeWord 0.4s steps(20, end) forwards 1.2s;
 }
 
 /* Animations */
@@ -1416,9 +1416,352 @@ body.ai-mode-active .ai-close {
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Hide ASSIST on mobile */
+/* --- Comprehensive Mobile Optimization --- */
 @media (max-width: 768px) {
+    /* Hide ASSIST on mobile */
     #nav-assist-btn {
         display: none !important;
+    }
+    
+    /* Navigation Bar Zero-Shot Redesign */
+    nav {
+        flex-direction: column !important;
+        height: auto !important;
+        padding: 10px 0 !important;
+        position: relative !important;
+        background: rgba(17, 14, 25, 0.95) !important;
+    }
+    .nav-logo {
+        justify-content: center !important;
+        margin-bottom: 5px !important;
+    }
+    .nav-logo span {
+        font-size: 1.1rem !important;
+    }
+    
+    /* The div holding navigation links */
+    nav > div:last-child {
+        width: 100% !important;
+        overflow-x: auto !important;
+        justify-content: flex-start !important;
+        padding: 5px 15px !important;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    nav > div:last-child::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .nav-archive-btn {
+        font-size: 0.8rem !important;
+        padding: 0.5rem 1rem !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 20px !important;
+        margin-right: 8px !important;
+        height: auto !important;
+    }
+    
+    .lang-pill {
+        flex-shrink: 0 !important;
+        margin-left: 5px !important;
+    }
+
+    /* Hero Section Fixes */
+    #hero {
+        padding-top: 2rem !important;
+        min-height: auto !important;
+        overflow-x: hidden;
+    }
+    .hero-content {
+        padding: 0 1rem !important;
+        text-align: center !important;
+        width: 100% !important;
+        margin-top: 0 !important;
+    }
+    
+    /* "보스턴 다이내믹스 지원자" Subtitle */
+    .hero-content .subtitle {
+        font-size: 0.95rem !important;
+        white-space: normal !important;
+        margin-bottom: 15px !important;
+        padding: 0 10px !important;
+        word-break: keep-all !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Huge typing slogan override */
+    #typing-slogan, .slogan {
+        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+        line-height: 1.25 !important;
+        white-space: normal !important;
+        word-break: keep-all !important;
+        margin-top: 15px !important;
+        margin-bottom: 25px !important;
+    }
+    
+    /* Human Profile Block */
+    .intro-block {
+        margin-top: 1.5rem !important;
+        padding: 1rem !important;
+        text-align: left !important;
+        border-radius: 12px !important;
+    }
+    .human-name {
+        font-size: 0.9rem !important;
+    }
+    .human-name span {
+        font-size: 1.3rem !important;
+        letter-spacing: 2px !important;
+    }
+    .human-slogan {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        word-break: keep-all !important;
+        white-space: normal !important;
+    }
+    .human-stats-container {
+        gap: 0.75rem !important;
+    }
+    .human-stat {
+        font-size: 0.8rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+    
+    /* Email link text break */
+    #email-copy {
+        white-space: normal !important;
+        word-break: break-all !important;
+        display: inline-block;
+    }
+
+    /* CTA Button Group */
+    .hero-cta {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 15px !important;
+        margin-top: 2rem !important;
+        padding: 15px !important;
+        background: transparent !important;
+        border: none !important;
+    }
+    .hero-cta .cta-btn, .github-card {
+        width: 100% !important;
+        max-width: 300px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Flow Stage Layouts */
+    .content-section {
+        padding: 60px 15px !important;
+    }
+    .content-body {
+        flex-direction: column !important;
+        gap: 2rem !important;
+    }
+    .why-left, .why-right {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        border-left: none !important;
+    }
+    
+    h2 {
+        font-size: 1.4rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 0.5rem;
+    }
+    .badge-num, .tag {
+        margin-left: 0 !important;
+    }
+    
+    /* Terminal UI / Code Blocks constraints */
+    pre, code {
+        font-size: 0.7rem !important;
+        padding: 0.5rem !important;
+        overflow-x: auto !important;
+    }
+    
+    /* Problem/Fix Nodes */
+    .pt-container {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+    .pt-node {
+        width: 100% !important;
+    }
+    .pt-arrow {
+        margin: 5px auto !important;
+    }
+
+    /* AI Chat Mobile Bounds */
+    .ai-chat-container {
+        width: 90% !important;
+        min-width: unset !important;
+        height: 75vh !important;
+    }
+
+    /* --- GLOBAL WRAPPERS & CONTAINERS (Sub Pages) --- */
+    .wrap, .board-container, .contact-container {
+        padding: 0 1rem !important;
+        margin-top: 2rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .contact-container {
+        padding: 1.5rem !important;
+    }
+
+    .contact-title {
+        font-size: 1.8rem !important;
+        white-space: normal !important;
+        word-break: keep-all !important;
+    }
+
+    /* --- PROJECT PAGES (2025/2026 Archive) --- */
+    .archive-hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem) !important;
+    }
+    .archive-hero .hero-desc {
+        font-size: 1rem !important;
+        white-space: normal !important;
+        word-break: keep-all !important;
+    }
+    
+    .hero-image {
+        opacity: 0.15 !important;
+        right: 0 !important;
+        width: 100vw !important;
+    }
+
+    .nav-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100% !important;
+    }
+    .nav-row .btn {
+        width: 100% !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+
+    .summary-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    .summary-card {
+        padding: 1.5rem !important;
+    }
+
+    /* TIMELINE & PROJECT BLOCKS */
+    .core-label {
+        display: none !important; /* Hide overlapping UI box on mobile */
+    }
+    .system-monitor {
+        display: none !important;
+    }
+    .timeline-item {
+        padding-left: 1.5rem !important;
+        margin-bottom: 2rem !important;
+    }
+    .timeline-text {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    .timeline-text > div {
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .timeline-text > div:first-child {
+        padding: 1rem !important;
+    }
+    .timeline-text > div:last-child {
+        min-height: 200px !important;
+        margin-top: 1rem !important;
+    }
+
+    .pff-box {
+        padding-left: 0.5rem !important;
+    }
+    .p-label, .f-label, .x-label {
+        width: 100% !important;
+        display: block !important;
+        margin-bottom: 0.2rem !important;
+    }
+    
+    .stack-box {
+        padding: 1.5rem !important;
+    }
+    .impact-section h2 {
+        font-size: 1.5rem !important;
+    }
+    .impact-section ul {
+        font-size: 1rem !important;
+        text-align: left !important;
+    }
+    
+    .accordion-toggle {
+        font-size: 1rem !important;
+        padding: 12px 16px !important;
+        white-space: normal !important;
+        word-break: keep-all !important;
+    }
+    .accordion-inner {
+        padding: 0 16px !important;
+    }
+    
+    /* --- BOARD PAGE (Q&A) --- */
+    .board-layout {
+        flex-direction: column !important;
+        gap: 2rem !important;
+    }
+    .board-left {
+        width: 100% !important;
+    }
+    .board-left h1 {
+        font-size: 1.8rem !important;
+        text-align: center !important;
+        margin-bottom: 1.5rem !important;
+    }
+    .post-card {
+        padding: 1.5rem !important;
+    }
+    .post-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+    }
+    .post-author {
+        flex-wrap: wrap !important;
+        word-break: break-all !important;
+    }
+    .post-meta {
+        text-align: left !important;
+    }
+    .reply-block, .reply-form-container {
+        padding: 1rem !important;
+        margin-left: -0.5rem !important;
+    }
+    .post-actions {
+        flex-wrap: wrap !important;
+        justify-content: flex-start !important;
+        gap: 1rem !important;
+    }
+    .board-form {
+        padding: 1.5rem !important;
+    }
+    
+    /* Ensure no horizontal body overflow universally on mobile */
+    body, html {
+        overflow-x: hidden !important;
     }
 }

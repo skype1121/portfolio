@@ -1215,7 +1215,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
                     loader.style.display = "none";
                 }, 1500); // Wait for the transition
-            }, 5000); // Display for 5 seconds before opening doors
+            }, 2000); // Display for 2 seconds before opening doors
         } else {
             loader.style.display = "none";
         }
