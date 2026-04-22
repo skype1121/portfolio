@@ -544,7 +544,8 @@ y = (R + r)*np.sin(theta) - d*np.sin((R + r)/r * theta)</code></pre>
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
         const container = document.getElementById('model-container');
-        if (container) {
+        // Only load heavy 3D models on Desktop (width > 900) to avoid extreme shader compilation freeze on mobile
+        if (container && window.innerWidth > 900) {
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
             camera.position.set(0, 1.5, 5);

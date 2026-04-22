@@ -231,7 +231,7 @@ window.addEventListener('touchmove', (e) => {
         mouse.x = e.touches[0].clientX;
         mouse.y = e.touches[0].clientY;
     }
-});
+}, { passive: true });
 
 function animateGraph() {
     ctx.clearRect(0, 0, width, height);

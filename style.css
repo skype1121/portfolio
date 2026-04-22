@@ -36,6 +36,7 @@ body {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: -2;
     transform: translateZ(0); /* Force GPU */
+    pointer-events: none;
     transition: filter 1.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease;
 }
 
@@ -745,11 +746,12 @@ code { font-family: var(--font-mono); }
 @keyframes packetTravelVer { 0% { top: 0; opacity: 0; transform: scaleY(0.5); } 10% { opacity: 1; transform: scaleY(1); } 90% { opacity: 1; transform: scaleY(1); } 100% { top: calc(100% - 30px); opacity: 0; transform: scaleY(0.5); } }
 
 @media (max-width: 600px) {
-    .slogan { font-size: 2.2rem; min-height: 180px; }
+    .slogan { font-size: 1.8rem; min-height: auto; }
     .hero { padding: 80px 5% 2rem 5%; }
     .hero-content { width: 100% !important; }
-    .flow-stage { padding: 60px 5%; min-height: auto; }
-    .section-container { margin-left: 0 !important; padding: 1.5rem 1rem !important; }
+    .flow-stage { padding: 40px 5%; min-height: auto; }
+    .section-container { margin-left: 0 !important; padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; }
+    .section-container::before { display: none !important; }
     .signal-flow-line { display: none; }
     .signal-node { display: none; }
     .pulse-flow-tracer { display: none; }
@@ -1232,7 +1234,8 @@ body.light-theme .signal-node { background: #000; border-color: #333; box-shadow
 }
 
 body.loading-active {
-    overflow: hidden;
+    /* Prevent iOS Safari stuck bug by optionally skipping forced overflow-hidden. 
+       The UI overlay itself will block pointer events instead. */
 }
 
 /* --- Hero Model AI Interaction --- */
@@ -1493,12 +1496,32 @@ body.ai-mode-active .ai-close {
 
     /* Huge typing slogan override */
     #typing-slogan, .slogan {
-        font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
-        line-height: 1.25 !important;
+        font-size: clamp(1.5rem, 7vw, 2.2rem) !important;
+        line-height: 1.35 !important;
         white-space: normal !important;
         word-break: keep-all !important;
-        margin-top: 15px !important;
-        margin-bottom: 25px !important;
+        margin-top: 10px !important;
+        margin-bottom: 20px !important;
+        min-height: auto !important;
+        letter-spacing: -0.5px !important;
+    }
+    
+    /* Remove Section Container Boxes on Mobile */
+    .section-container {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+    .section-container:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .section-container::before {
+        display: none !important;
     }
     
     /* Human Profile Block */
