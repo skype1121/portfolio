@@ -107,29 +107,70 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        function submitContact() {
-            // Frontend generic success behavior
+    <script type="module" src="firebase.js"></script>
+    <script type="module">
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        window.submitContact = async function() {
             const btn = document.querySelector('.submit-btn');
             const originalText = btn.innerHTML;
+            const isEn = document.querySelector('.lang-btn.active') ? document.querySelector('.lang-btn.active').innerText === 'EN' : false;
 
-            // Show successful connection UI
-            btn.innerHTML = '<span style="color:#0f0; text-shadow: 0 0 10px #0f0;">[ OK ] TRANSMISSION SUCCESS</span>';
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !message) {
+                alert(isEn ? 'Please fill out all fields.' : '모든 항목을 입력해주세요.');
+                return;
+            }
+
+            btn.innerHTML = '<span style="color:#ffcc00;">TRANSMITTING...</span>';
             btn.style.pointerEvents = 'none';
-            btn.style.boxShadow = '0 0 30px #0f0';
-            btn.style.borderColor = '#0f0';
 
-            setTimeout(() => {
-                document.getElementById('contact-form').reset();
-                btn.innerHTML = originalText;
-                btn.style.pointerEvents = 'auto';
-                btn.style.boxShadow = 'none';
-                btn.style.borderColor = 'var(--bd-cyan)';
+            try {
+                // Wait for DB initialization
+                const db = await new Promise(resolve => {
+                    const interval = setInterval(() => {
+                        if (window.db) {
+                            clearInterval(interval);
+                            resolve(window.db);
+                        }
+                    }, 50);
+                });
 
-                const isEn = document.querySelector('.lang-btn.active') ? document.querySelector('.lang-btn.active').innerText === 'EN' : false;
-                alert(isEn ? "Message transmitted securely! We will reach out soon." : "소중한 궤적 데이터가 성공적으로 버퍼에 쓰였습니다. 금방 회신드리겠습니다!");
-            }, 1500);
-        }
+                // Save to Firestore 'contacts' collection
+                await addDoc(collection(db, "contacts"), {
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: Date.now()
+                });
+
+                // Show successful connection UI
+                btn.innerHTML = '<span style="color:#0f0; text-shadow: 0 0 10px #0f0;">[ OK ] TRANSMISSION SUCCESS</span>';
+                btn.style.boxShadow = '0 0 30px #0f0';
+                btn.style.borderColor = '#0f0';
+
+                setTimeout(() => {
+                    document.getElementById('contact-form').reset();
+                    btn.innerHTML = originalText;
+                    btn.style.pointerEvents = 'auto';
+                    btn.style.boxShadow = 'none';
+                    btn.style.borderColor = 'var(--bd-cyan)';
+
+                    alert(isEn ? "Message transmitted securely to Database! We will reach out soon." : "소중한 궤적 데이터가 성공적으로 DB에 저장되었습니다. 금방 회신드리겠습니다!");
+                }, 1500);
+
+            } catch (error) {
+                console.error("Error writing document: ", error);
+                btn.innerHTML = '<span style="color:#ff3333;">TRANSMISSION FAILED</span>';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.pointerEvents = 'auto';
+                }, 2000);
+            }
+        };
     </script>
     <style>
         @keyframes formFadeIn {
